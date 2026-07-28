@@ -28,6 +28,29 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', onHeaderScroll, { passive: true });
 
   /* ---------------------------------------------------------------------
+     1b) HAMBURGER MENU — toggle the mobile panel open/closed
+  --------------------------------------------------------------------- */
+  const navBurger = document.getElementById('navBurger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  const closeMobileMenu = () => {
+    navBurger.classList.remove('is-open');
+    mobileMenu.classList.remove('is-open');
+    navBurger.setAttribute('aria-expanded', 'false');
+  };
+
+  navBurger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('is-open');
+    navBurger.classList.toggle('is-open', isOpen);
+    navBurger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close the menu whenever a link inside it is clicked (navigating away)
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  /* ---------------------------------------------------------------------
      2) HERO VIDEO GRID — the 3rd cell is CSS-hidden ≤900px, the 2nd cell
         is also hidden ≤600px (see style.css). Hidden videos would still
         keep playing/decoding in the background otherwise, so mirror the
