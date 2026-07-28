@@ -198,7 +198,7 @@ a {
   column-gap: 20px;
 }
 .nav-link {
-  font-size: 0.86rem;
+  font-size: 18px;
   letter-spacing: 0.03em;
   color: var(--cream);
   opacity: 0.88;
@@ -243,8 +243,8 @@ a {
   display: block;
 }
 .logo-mark {
-  width: 44px;
-  height: 44px;
+  width: 94px;
+  height: 95px;
   display: block;
 }
 .logo-letter {
