@@ -450,14 +450,20 @@ a {
   background: var(--cream);
   padding: 0 0 140px;
 }
-.team-header {
+.team-layout {
+  display: flex;
+  align-items: flex-end;
+  gap: 40px;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 5vw, 64px);
+  padding-left: clamp(20px, 5vw, 64px);
+}
+.team-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 48px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  flex-shrink: 0;
 }
 .team-title {
   font-family: var(--font-display);
@@ -496,8 +502,10 @@ a {
   gap: 24px;
   overflow-x: auto;
   scroll-snap-type: x proximity;
-  padding: 0 clamp(20px, 5vw, 64px) 12px;
+  padding: 0 clamp(20px, 5vw, 64px) 12px 0;
   scrollbar-width: none;
+  flex: 1;
+  min-width: 0;
 }
 .team-track::-webkit-scrollbar { display: none; }
 
