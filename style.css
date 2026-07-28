@@ -262,7 +262,7 @@ a {
   position: relative;
   min-height: 100svh;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   overflow: hidden;
   background: #12140f;
 }
@@ -333,11 +333,13 @@ a {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 5vw, 64px) 96px;
+  padding: 0 clamp(20px, 5vw, 64px);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 28px;
 }
 .hero-eyebrow {
@@ -356,11 +358,12 @@ a {
   font-size: clamp(2.6rem, 6.4vw, 5.4rem);
   line-height: 1.06;
   letter-spacing: -0.01em;
-  max-width: 15ch;
+  max-width: 18ch;
 }
 .hero-title .line {
   display: block;
   overflow: hidden;
+  text-align: center;
 }
 .hero-title .ink { color: var(--cream); }
 .hero-title .ink-em {
@@ -377,6 +380,7 @@ a {
 }
 .hero-cta {
   display: flex;
+  justify-content: center;
   gap: 16px;
   margin-top: 4px;
 }
