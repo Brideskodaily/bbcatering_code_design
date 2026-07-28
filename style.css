@@ -283,22 +283,9 @@ a {
   overflow: hidden;
   background: #0d0f0b; /* fallback while video loads */
 }
-/* METHOD A — Cloudflare Stream iframe: object-fit has NO effect on
-   <iframe> elements (browsers ignore it), so we can only size the frame
-   itself to fill the cell. The Stream player letterboxes/crops internally
-   on its own — there is no CSS way to force true edge-to-edge cover
-   cropping on an iframe's embedded video from the parent page. If you
-   need guaranteed edge-to-edge cropping, switch that cell to Method B. */
-.hero-video-cell iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  pointer-events: none; /* prevents the Stream iframe's own click-to-pause */
-}
-/* METHOD B — native <video>: object-fit:cover works exactly like a
-   background-image, true edge-to-edge crop regardless of source ratio. */
+/* object-fit: cover crops each video edge-to-edge to fill its cell,
+   exactly like a background-image, regardless of the source's aspect
+   ratio or the cell's shape at any breakpoint. */
 .hero-video-cell video {
   position: absolute;
   inset: 0;

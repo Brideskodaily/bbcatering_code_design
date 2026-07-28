@@ -1,7 +1,7 @@
 /* ==========================================================================
    BB CATERING — interaction script
    1) Header shrink + blur on scroll
-   2) Hero video grid: Method B (HLS) setup + pause offscreen cells
+   2) Hero video grid: pause offscreen cells on tablet/mobile (bandwidth)
    3) Parallax on contact background image
    4) Statement text: word-by-word color reveal tied to scroll position
       (grey -> ink, as the section is scrolled through)
@@ -28,54 +28,23 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', onHeaderScroll, { passive: true });
 
   /* ---------------------------------------------------------------------
-     2) HERO VIDEO GRID
-     2a) Method B (native <video> + HLS) playback setup, if present.
-     2b) Pause offscreen cells on tablet/mobile so hidden videos stop
-         decoding in the background (bandwidth). Cloudflare Stream
-         iframes (Method A) can't be paused from the parent page without
-         loading the Stream SDK — this only affects Method B cells; a
-         hidden iframe is comparatively lightweight anyway.
+     2) HERO VIDEO GRID — the 3rd cell is CSS-hidden ≤900px, the 2nd cell
+        is also hidden ≤600px (see style.css). Hidden videos would still
+        keep playing/decoding in the background otherwise, so mirror the
+        same breakpoints here and actually pause them — saves data on
+        phones and tablets, and resumes playback if the window is resized
+        back up past a breakpoint.
   --------------------------------------------------------------------- */
   const heroCells = document.querySelectorAll('.hero-video-cell');
   const tabletQuery = window.matchMedia('(max-width: 900px)');
   const mobileQuery = window.matchMedia('(max-width: 600px)');
 
-  // 2a) Method B: wire up HLS playback for any native <video data-hero-video>.
-  // Safari plays HLS natively; every other browser needs hls.js, loaded on
-  // demand only when a Method B video is actually present, so Method A
-  // (iframe-only) pages never pay this cost.
-  const heroHlsVideos = document.querySelectorAll('[data-hero-video]');
-  if (heroHlsVideos.length) {
-    const needsHlsJs = !document.createElement('video').canPlayType('application/vnd.apple.mpegurl');
-    const setupHlsVideo = (video, Hls) => {
-      const src = video.querySelector('source')?.src;
-      if (!src) return;
-      if (Hls && Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(src);
-        hls.attachMedia(video);
-      } else {
-        video.src = src; // Safari: native HLS, no library needed
-      }
-      video.play().catch(() => {}); // autoplay may need a user gesture on some browsers
-    };
-    if (needsHlsJs) {
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js';
-      script.onload = () => heroHlsVideos.forEach(v => setupHlsVideo(v, window.Hls));
-      document.head.appendChild(script);
-    } else {
-      heroHlsVideos.forEach(v => setupHlsVideo(v, null));
-    }
-  }
-
-  // 2b) Pause/resume Method B videos as cells hide/show at breakpoints.
   const syncHeroVideos = () => {
     heroCells.forEach(cell => {
       const idx = cell.dataset.heroCell;
       const isHidden = (idx === '3' && tabletQuery.matches) || (idx === '2' && mobileQuery.matches);
       const video = cell.querySelector('video');
-      if (!video) return; // iframe-based cells (Method A) have nothing to pause here
+      if (!video) return;
       if (isHidden) {
         video.pause();
       } else if (video.paused) {

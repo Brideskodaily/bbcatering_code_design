@@ -32,89 +32,46 @@
 
 <!-- ============ HERO ============ -->
 <!--
-  HERO VIDEO SETUP — Cloudflare Stream
-  ======================================
-  Each .hero-video-cell holds ONE video. Two embed methods are supported —
-  use whichever matches how you upload in Cloudflare Stream. Delete the
-  method you don't use inside each cell.
+  HERO VIDEO SETUP — Cloudflare R2 (direct .mp4 files)
+  ======================================================
+  Each .hero-video-cell holds one native <video> tag pointing straight at
+  an .mp4 hosted on Cloudflare R2. This is simpler than Cloudflare Stream:
+  no iframe, no HLS, no extra JS — the browser plays the file directly,
+  and object-fit: cover (in style.css) crops it edge-to-edge exactly like
+  the rest of the site's imagery.
 
-  METHOD A — Cloudflare Stream iframe (simplest, no extra JS, works out
-  of the box with Stream's adaptive bitrate player):
-    Replace CUSTOMER_CODE and VIDEO_UID_1/2/3 below with your values from
-    the Stream dashboard (Customer Code: dash.cloudflare.com → Stream →
-    top right; Video UID: click a video → copy from the URL or Embed tab).
-    URL pattern:
-    https://customer-<CUSTOMER_CODE>.cloudflarestream.com/<VIDEO_UID>/iframe
-    Query params already set below for silent autoplay loop, no controls.
-    NOTE: browsers ignore CSS object-fit on <iframe> elements, so the Stream
-    player's own internal scaling decides how each video fills its cell —
-    it generally letterboxes to the frame rather than hard-cropping edge to
-    edge. If you need guaranteed edge-to-edge cover cropping (like a true
-    background video), use Method B instead for that cell.
-
-  METHOD B — native <video> tag with an HLS manifest (gives you full
-  control over styling/cropping like a normal background video, but
-  needs an HLS-capable browser or hls.js — see script.js):
-    Replace VIDEO_UID with your Stream video UID. The .m3u8 URL pattern:
-    https://customer-<CUSTOMER_CODE>.cloudflarestream.com/<VIDEO_UID>/manifest/video.m3u8
-    A poster image (first-frame fallback) is strongly recommended.
-    object-fit: cover is applied automatically (see style.css), so this
-    crops edge-to-edge exactly like the rest of the site's imagery.
+  To swap a video later: just replace the src="" URL on the <source> tag
+  inside the matching cell. To add a poster (a fallback image shown for a
+  split second before the video starts), add poster="assets/your-image.jpg"
+  on the <video> tag.
 
   RESPONSIVE BEHAVIOUR (handled purely in CSS, no JS needed):
     Desktop  (>900px):  all 3 cells visible, side by side
     Tablet   (601–900px): only cells 1 and 2 visible (cell 3 hidden)
     Mobile   (≤600px):  only cell 1 visible (cells 2 and 3 hidden)
-  Videos keep playing even when hidden via CSS (display:none would stop
-  them, so hidden cells are collapsed with width/visibility instead) —
-  see .hero-video-cell rules in style.css if you want to hard-pause
-  offscreen videos for bandwidth savings (see script.js hero video pause
-  logic, already wired up).
+  Hidden cells are actually paused via script.js (not just visually
+  hidden), so phones and tablets don't waste data playing offscreen video.
 -->
 <section class="hero" id="hero">
   <div class="hero-media">
     <div class="hero-video-grid">
 
       <div class="hero-video-cell" data-hero-cell="1">
-        <!-- METHOD A: Cloudflare Stream iframe -->
-        <iframe
-          src="https://customer-CUSTOMER_CODE.cloudflarestream.com/VIDEO_UID_1/iframe?autoplay=true&muted=true&loop=true&controls=false&preload=auto"
-          loading="lazy"
-          style="border:none;"
-          allow="autoplay; encrypted-media"
-          allowfullscreen="false"
-          title="BB Catering — video 1"
-        ></iframe>
-
-        <!-- METHOD B (alternative): native video tag — delete the iframe
-             above and uncomment this if you prefer direct HLS playback
-        <video autoplay muted loop playsinline preload="auto"
-               poster="assets/hero-video-1-poster.jpg" data-hero-video>
-          <source src="https://customer-CUSTOMER_CODE.cloudflarestream.com/VIDEO_UID_1/manifest/video.m3u8" type="application/x-mpegURL">
+        <video autoplay muted loop playsinline preload="auto" data-hero-video>
+          <source src="https://pub-b56ad53318b444369f1eda44267ab2a8.r2.dev/BB_video_web_hero1.mp4" type="video/mp4">
         </video>
-        -->
       </div>
 
       <div class="hero-video-cell" data-hero-cell="2">
-        <iframe
-          src="https://customer-CUSTOMER_CODE.cloudflarestream.com/VIDEO_UID_2/iframe?autoplay=true&muted=true&loop=true&controls=false&preload=auto"
-          loading="lazy"
-          style="border:none;"
-          allow="autoplay; encrypted-media"
-          allowfullscreen="false"
-          title="BB Catering — video 2"
-        ></iframe>
+        <video autoplay muted loop playsinline preload="auto" data-hero-video>
+          <source src="https://pub-b56ad53318b444369f1eda44267ab2a8.r2.dev/BB_video_web_hero2.mp4" type="video/mp4">
+        </video>
       </div>
 
       <div class="hero-video-cell" data-hero-cell="3">
-        <iframe
-          src="https://customer-CUSTOMER_CODE.cloudflarestream.com/VIDEO_UID_3/iframe?autoplay=true&muted=true&loop=true&controls=false&preload=auto"
-          loading="lazy"
-          style="border:none;"
-          allow="autoplay; encrypted-media"
-          allowfullscreen="false"
-          title="BB Catering — video 3"
-        ></iframe>
+        <video autoplay muted loop playsinline preload="auto" data-hero-video>
+          <source src="https://pub-b56ad53318b444369f1eda44267ab2a8.r2.dev/BB_video_web_hero3.mp4" type="video/mp4">
+        </video>
       </div>
 
     </div>
@@ -122,7 +79,7 @@
   </div>
 
   <div class="hero-content">
-    <p class="hero-eyebrow reveal-fade">— test</p>
+    <p class="hero-eyebrow reveal-fade">— CATERING NA MIERU — VŠADE TAM KDE NAJVIAC ZÁLEŽÍ</p>
     <h1 class="hero-title">
       <span class="line reveal-line"><span class="ink">Premeníme</span> váš event</span>
       <span class="line reveal-line">na <em class="ink-em">fine dining</em> zážitok</span>
