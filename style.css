@@ -976,6 +976,8 @@ a {
   border: none;
   cursor: pointer;
   padding: 0;
+  position: relative;
+  z-index: 100;
 }
 .nav-burger span {
   display: block;
@@ -999,7 +1001,7 @@ a {
   top: 0;
   right: 0;
   height: 100vh;
-  width: min(320px, 80vw);
+  width: 100%;
   background: var(--forest-deep);
   z-index: 99;
   display: flex;
@@ -1023,9 +1025,14 @@ a {
   gap: 20px;
 }
 .mobile-menu-social a {
-  color: var(--cream);
-  font-size: 15px;
-  text-decoration: none;
+  display: inline-flex;
+}
+.social-icon {
+  width: 26px;
+  height: 26px;
+  /* SVG má farbu "zapečenú" natvrdo v súbore (#1b0303, tmavá) — filter ju
+     prefarbí na svetlú, aby bola vidno na tmavom pozadí panela. */
+  filter: brightness(0) saturate(100%) invert(93%) sepia(4%) saturate(263%) hue-rotate(9deg) brightness(101%) contrast(94%);
 }
 
 @media (max-width: 720px) {
