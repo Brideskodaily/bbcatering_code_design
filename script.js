@@ -213,6 +213,23 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     prevBtn.addEventListener('click', () => scrollByCard(-1));
     nextBtn.addEventListener('click', () => scrollByCard(1));
+    
+    // Match .team-header's height to the first photo's height (not the whole
+  // card, which also includes the caption below it) so the title's top
+  // edge and the arrows' bottom edge line up exactly with the photo row.
+  const teamHeader = document.querySelector('.team-header');
+  const firstTeamPhoto = document.querySelector('.team-photo');
+  const syncTeamHeaderHeight = () => {
+    if (!teamHeader || !firstTeamPhoto) return;
+    if (window.innerWidth <= 900) {
+      teamHeader.style.height = '';
+    } else {
+      teamHeader.style.height = firstTeamPhoto.getBoundingClientRect().height + 'px';
+    }
+  };
+  syncTeamHeaderHeight();
+  window.addEventListener('resize', syncTeamHeaderHeight);
+  window.addEventListener('load', syncTeamHeaderHeight);
   }
 
   /* ---------------------------------------------------------------------

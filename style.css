@@ -452,7 +452,7 @@ a {
 }
 .team-layout {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 40px;
   max-width: 1400px;
   margin: 0 auto;
@@ -461,9 +461,10 @@ a {
 .team-header {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
-  gap: 24px;
   flex-shrink: 0;
+  width: 200px;
 }
 .team-title {
   font-family: var(--font-display);
