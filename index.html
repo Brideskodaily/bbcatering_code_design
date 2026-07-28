@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BB Catering — Premeníme váš event na fine dining zážitok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ CUSTOM CURSOR (dekoratívny, jemný) ============ -->
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <nav class="nav-inner">
+    <a href="#referencie" class="nav-link">Referencie</a>
+    <a href="#o-nas" class="nav-link">O nás</a>
+    <a href="#hero" class="nav-logo" aria-label="BB Catering domov">
+      <svg viewBox="0 0 60 46" class="logo-mark">
+        <text x="0" y="36" class="logo-letter">B</text>
+        <text x="26" y="36" class="logo-letter">B</text>
+      </svg>
+    </a>
+    <a href="#kontakt" class="nav-link">Kontakt</a>
+    <a href="#partnerstva" class="nav-link">Partnerstvá</a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<!--
+  HERO VIDEO SETUP — Cloudflare Stream
+  ======================================
+  Each .hero-video-cell holds ONE video. Two embed methods are supported —
+  use whichever matches how you upload in Cloudflare Stream. Delete the
+  method you don't use inside each cell.
+
+  METHOD A — Cloudflare Stream iframe (simplest, no extra JS, works out
+  of the box with Stream's adaptive bitrate player):
+    Replace CUSTOMER_CODE and VIDEO_UID_1/2/3 below with your values from
+    the Stream dashboard (Customer Code: dash.cloudflare.com → Stream →
+    top right; Video UID: click a video → copy from the URL or Embed tab).
+    URL pattern:
+    https://customer-<CUSTOMER_CODE>.cloudflarestream.com/<VIDEO_UID>/iframe
+    Query params already set below for silent autoplay loop, no controls.
+    NOTE: browsers ignore CSS object-fit on <iframe> elements, so the Stream
+    player's own internal scaling decides how each video fills its cell —
+    it generally letterboxes to the frame rather than hard-cropping edge to
+    edge. If you need guaranteed edge-to-edge cover cropping (like a true
+    background video), use Method B instead for that cell.
+
+  METHOD B — native <video> tag with an HLS manifest (gives you full
+  control over styling/cropping like a normal background video, but
+  needs an HLS-capable browser or hls.js — see script.js):
+    Replace VIDEO_UID with your Stream video UID. The .m3u8 URL pattern:
+    https://customer-<CUSTOMER_CODE>.cloudflarestream.com/<VIDEO_UID>/manifest/video.m3u8
+    A poster image (first-frame fallback) is strongly recommended.
+    object-fit: cover is applied automatically (see style.css), so this
+    crops edge-to-edge exactly like the rest of the site's imagery.
+
+  RESPONSIVE BEHAVIOUR (handled purely in CSS, no JS needed):
+    Desktop  (>900px):  all 3 cells visible, side by side
+    Tablet   (601–900px): only cells 1 and 2 visible (cell 3 hidden)
+    Mobile   (≤600px):  only cell 1 visible (cells 2 and 3 hidden)
+  Videos keep playing even when hidden via CSS (display:none would stop
+  them, so hidden cells are collapsed with width/visibility instead) —
+  see .hero-video-cell rules in style.css if you want to hard-pause
+  offscreen videos for bandwidth savings (see script.js hero video pause
+  logic, already wired up).
+-->
+<section class="hero" id="hero">
+  <div class="hero-media">
+    <div class="hero-video-grid">
+
+      <div class="hero-video-cell" data-hero-cell="1">
+        <!-- METHOD A: Cloudflare Stream iframe -->
+        <iframe
+          src="https://customer-CUSTOMER_CODE.cloudflarestream.com/VIDEO_UID_1/iframe?autoplay=true&muted=true&loop=true&controls=false&preload=auto"
+          loading="lazy"
+          style="border:none;"
+          allow="autoplay; encrypted-media"
+          allowfullscreen="false"
+          title="BB Catering — video 1"
+        ></iframe>
+
+        <!-- METHOD B (alternative): native video tag — delete the iframe
+             above and uncomment this if you prefer direct HLS playback
+        <video autoplay muted loop playsinline preload="auto"
+               poster="assets/hero-video-1-poster.jpg" data-hero-video>
+          <source src="https://customer-CUSTOMER_CODE.cloudflarestream.com/VIDEO_UID_1/manifest/video.m3u8" type="application/x-mpegURL">
+        </video>
+        -->
+      </div>
+
+      <div class="hero-video-cell" data-hero-cell="2">
+        <iframe
+          src="https://customer-CUSTOMER_CODE.cloudflarestream.com/VIDEO_UID_2/iframe?autoplay=true&muted=true&loop=true&controls=false&preload=auto"
+          loading="lazy"
+          style="border:none;"
+          allow="autoplay; encrypted-media"
+          allowfullscreen="false"
+          title="BB Catering — video 2"
+        ></iframe>
+      </div>
+
+      <div class="hero-video-cell" data-hero-cell="3">
+        <iframe
+          src="https://customer-CUSTOMER_CODE.cloudflarestream.com/VIDEO_UID_3/iframe?autoplay=true&muted=true&loop=true&controls=false&preload=auto"
+          loading="lazy"
+          style="border:none;"
+          allow="autoplay; encrypted-media"
+          allowfullscreen="false"
+          title="BB Catering — video 3"
+        ></iframe>
+      </div>
+
+    </div>
+    <div class="hero-scrim"></div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow reveal-fade">— CATERING NA MIERU — VŠADE TAM KDE NAJVIAC ZÁLEŽÍ</p>
+    <h1 class="hero-title">
+      <span class="line reveal-line"><span class="ink">Premeníme</span> váš event</span>
+      <span class="line reveal-line">na <em class="ink-em">fine dining</em> zážitok</span>
+    </h1>
+    <p class="hero-sub reveal-fade">
+      Rodinný catering s dôrazom na kvalitu, osobný prístup a chute,
+      ktoré si zapamätáte. Varíme naživo, z toho najlepšieho, čo
+      ponúkajú slovenské farmy.
+    </p>
+    <div class="hero-cta reveal-fade">
+      <a href="#kontakt" class="btn btn-primary">Kontakt</a>
+      <a href="#referencie" class="btn btn-ghost">
+        <span class="arrow">→</span> Referencie
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-cue" aria-hidden="true">
+    <span></span>
+  </div>
+</section>
+
+<!-- ============ INTRO STATEMENT (color-shift-on-scroll text) ============ -->
+<section class="statement" id="o-nas">
+  <div class="statement-inner">
+    <svg viewBox="0 0 60 46" class="statement-mark" aria-hidden="true">
+      <text x="0" y="36" class="logo-letter">B</text>
+      <text x="26" y="36" class="logo-letter">B</text>
+    </svg>
+    <div class="statement-rule"></div>
+
+    <p class="statement-text" data-scroll-color>
+      <span class="word-strong">Sme</span> <span class="word-strong">rodina,</span> <span class="word-strong">ktorá</span> <span class="word-strong">varí</span> <span class="word-strong">pre</span> <span class="word-strong">vašu</span> <span class="word-strong">rodinu.</span> <span class="word">Menu</span> <span class="word">vytvárame</span> <span class="word">na</span> <span class="word">mieru</span> <span class="word">pri</span> <span class="word">osobnom</span> <span class="word">stretnutí</span> <span class="word">u</span> <span class="word">nás</span> <span class="word">doma,</span> <span class="word">zo</span> <span class="word">surovín</span> <span class="word">od</span> <span class="word">slovenských</span> <span class="word">fariem</span> <span class="word">a</span> <span class="word">pripravujeme</span> <span class="word">ho</span> <span class="word">naživo,</span> <span class="word">priamo</span> <span class="word">pred</span> <span class="word">vašimi</span> <span class="word">hosťami.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ TEAM CAROUSEL ============ -->
+<section class="team">
+  <div class="team-header reveal-up">
+    <h2 class="team-title">Toto je náš tím</h2>
+    <div class="team-nav">
+      <button class="team-arrow" id="teamPrev" aria-label="Predošlý člen tímu">
+        <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+      <button class="team-arrow" id="teamNext" aria-label="Ďalší člen tímu">
+        <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="team-track" id="teamTrack">
+    <article class="team-card reveal-up">
+      <div class="team-photo">
+        <img src="assets/chef-barbora.jpg" alt="Barbora Belanová" loading="lazy">
+      </div>
+      <div class="team-caption">
+        <span class="team-role">— CHEF</span>
+        <h3 class="team-name">Barbora Belanová</h3>
+      </div>
+    </article>
+
+    <article class="team-card reveal-up">
+      <div class="team-photo">
+        <img src="assets/chef-belan.jpg" alt="Pán Belan" loading="lazy">
+      </div>
+      <div class="team-caption">
+        <span class="team-role">— CHEF</span>
+        <h3 class="team-name">Pán Belan</h3>
+      </div>
+    </article>
+
+    <article class="team-card reveal-up">
+      <div class="team-photo">
+        <img src="assets/chef-pani-belanova.jpg" alt="Pani Belanová" loading="lazy">
+      </div>
+      <div class="team-caption">
+        <span class="team-role">— CHEF</span>
+        <h3 class="team-name">Pani Belanová</h3>
+      </div>
+    </article>
+
+    <article class="team-card reveal-up">
+      <div class="team-photo">
+        <img src="assets/chef-fourth.jpg" alt="Servisný tím BB Catering" loading="lazy">
+      </div>
+      <div class="team-caption">
+        <span class="team-role">— SERVIS</span>
+        <h3 class="team-name">Náš tím</h3>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ STORY BLOCK 1 — Sme rodina ============ -->
+<section class="story">
+  <div class="story-block story-block--one">
+    <figure class="story-figure story-figure--tall reveal-scale">
+      <img src="assets/story-field.jpg" alt="Večerná krajina pri príprave cateringu">
+    </figure>
+    <figure class="story-figure story-figure--overlap reveal-scale">
+      <img src="assets/story-plates.jpg" alt="Fine dining taniere BB Catering">
+    </figure>
+
+    <div class="story-copy reveal-up">
+      <span class="eyebrow">— O NÁS</span>
+      <h2 class="story-title">Sme rodina,<br>ktorá varí<br>pre rodiny</h2>
+      <p class="story-text">
+        BB Catering vedie rodina, pre ktorú je varenie spôsobom
+        života, nie len povolaním. Manželka je srdcom kuchyne,
+        manžel a dcéra sú pri každom kroku s ňou. Postaráme sa
+        o najbližších — a rovnako to chceme spraviť aj u vás.
+      </p>
+    </div>
+  </div>
+
+  <div class="story-block story-block--two">
+    <figure class="story-figure story-figure--wide reveal-scale">
+      <img src="assets/story-team.jpg" alt="Tím BB Catering pri príprave jedla">
+    </figure>
+    <figure class="story-figure story-figure--small reveal-scale">
+      <img src="assets/story-dessert.jpg" alt="Dezert BB Catering">
+    </figure>
+  </div>
+
+  <div class="story-block story-block--three">
+    <div class="story-copy reveal-up">
+      <span class="eyebrow">— O NÁS</span>
+      <h2 class="story-title">Varíme z toho, čo dáva<br><em>slovenská pôda</em></h2>
+      <p class="story-text">
+        Mäso, zeleninu, mliečne výrobky aj korenie
+        nakupujeme priamo od slovenských fariem a
+        preverených výrobcov, ktorých poznáme osobne.
+        Podporujeme slovenské poľnohospodárstvo a
+        remeselnú výrobu.
+      </p>
+    </div>
+    <figure class="story-figure story-figure--tall reveal-scale">
+      <img src="assets/story-cook.jpg" alt="Šéfkuchárka pri grile">
+    </figure>
+    <figure class="story-figure story-figure--overlap-bottom reveal-scale">
+      <img src="assets/story-grill.jpg" alt="Steak na grile">
+    </figure>
+  </div>
+</section>
+
+<!-- ============ OCCASIONS (hover greyscale -> color, lift) ============ -->
+<section class="occasions">
+  <div class="occasions-header reveal-up">
+    <span class="eyebrow eyebrow--center">— PODUJATIA</span>
+    <h2 class="occasions-title">Pre aké príležitosti varíme</h2>
+  </div>
+
+  <div class="occasions-grid">
+    <a href="#" class="occasion-tile reveal-up">
+      <img src="assets/occ-svadby.jpg" alt="Svadobný pár s cateringom BB" class="occasion-img">
+      <div class="occasion-overlay"></div>
+      <div class="occasion-copy">
+        <h3>Svadby</h3>
+        <p>Na mieru, pre váš veľký deň</p>
+      </div>
+    </a>
+
+    <a href="#" class="occasion-tile reveal-up">
+      <img src="assets/occ-oslavy.jpg" alt="Oslava s tímom BB Catering" class="occasion-img">
+      <div class="occasion-overlay"></div>
+      <div class="occasion-copy">
+        <h3>Oslavy a rodinné udalosti</h3>
+        <p>Domáca chuť pre rodinné chvíle</p>
+      </div>
+    </a>
+
+    <a href="#" class="occasion-tile reveal-up">
+      <img src="assets/occ-plesy.jpg" alt="Elegantný večerný catering" class="occasion-img">
+      <div class="occasion-overlay"></div>
+      <div class="occasion-copy">
+        <h3>Plesy</h3>
+        <p>Elegancia pre spoločenské večery</p>
+      </div>
+    </a>
+
+    <a href="#" class="occasion-tile reveal-up">
+      <img src="assets/occ-firemne.jpg" alt="Firemná akcia s cateringom BB" class="occasion-img">
+      <div class="occasion-overlay"></div>
+      <div class="occasion-copy">
+        <h3>Firemné akcie</h3>
+        <p>Reprezentatívny catering pre firmy</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ GALLERY — Keď sa kuchyňa ladí s prostredím ============ -->
+<section class="gallery" id="referencie">
+  <div class="gallery-header reveal-up">
+    <span class="eyebrow eyebrow--center">— GALÉRIA</span>
+    <h2 class="gallery-title">Keď sa kuchyňa ladí<br>s prostredím</h2>
+    <a href="#" class="gallery-link">
+      <span class="arrow">→</span> Galéria akcií
+    </a>
+  </div>
+
+  <div class="gallery-grid">
+    <figure class="gallery-item reveal-fade"><img src="assets/gal-1.jpg" alt="Servírované jedlá z vtáčej perspektívy"></figure>
+    <figure class="gallery-item reveal-fade"><img src="assets/gal-2.jpg" alt="Foie gras s pečeným zemiakom"></figure>
+    <figure class="gallery-item reveal-fade"><img src="assets/gal-3.jpg" alt="Tomahawk steak na ohni"></figure>
+    <figure class="gallery-item reveal-fade"><img src="assets/gal-4.jpg" alt="Príprava na Big Green Egg grile"></figure>
+    <figure class="gallery-item reveal-fade"><img src="assets/gal-5.jpg" alt="Atmosféra večernej akcie"></figure>
+    <figure class="gallery-item reveal-fade"><img src="assets/gal-6.jpg" alt="Tím BB Catering pri nočnom grilovaní"></figure>
+  </div>
+</section>
+
+<!-- ============ CONTACT / FOOTER ============ -->
+<footer class="contact" id="kontakt">
+  <div class="contact-bg" data-parallax></div>
+  <div class="contact-scrim"></div>
+
+  <div class="contact-inner">
+    <h2 class="contact-title reveal-up">Máte v hlave nejakú predstavu?<br>Radi si ju vypočujeme.</h2>
+
+    <form class="contact-form reveal-up" id="contactForm">
+      <div class="form-row">
+        <div class="form-field">
+          <input type="text" id="fname" name="fname" required placeholder=" ">
+          <label for="fname">Meno a priezvisko</label>
+        </div>
+        <div class="form-field">
+          <input type="email" id="femail" name="femail" required placeholder=" ">
+          <label for="femail">E-mail</label>
+        </div>
+      </div>
+      <div class="form-field form-field--full">
+        <textarea id="fmsg" name="fmsg" rows="3" required placeholder=" "></textarea>
+        <label for="fmsg">Napíšte nám o vašej predstave alebo o pripravovanej akcii...</label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-submit">
+        <span class="arrow">→</span> Odoslať
+      </button>
+    </form>
+
+    <div class="contact-footer-row">
+      <svg viewBox="0 0 60 46" class="footer-mark" aria-hidden="true">
+        <text x="0" y="36" class="logo-letter">B</text>
+        <text x="26" y="36" class="logo-letter">B</text>
+      </svg>
+      <p class="footer-meta">© 2026 BB Catering — Rodinný catering so slovenskou dušou</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
