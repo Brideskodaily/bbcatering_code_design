@@ -156,6 +156,31 @@ a {
 }
 
 /* ==========================================================================
+   Family photo reveal — dedicated fade + scale animation for the story
+   block 2 team/family photo specifically. Kept separate from the shared
+   .reveal-scale class (same base look for now) so this one photo — the
+   client considers it especially important — can be tuned independently
+   later (timing, scale amount, etc.) without affecting any other reveal
+   animation on the site.
+   ========================================================================== */
+.family-photo-reveal {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 1.1s var(--ease-soft), transform 1.3s var(--ease-soft);
+}
+.family-photo-reveal.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .family-photo-reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
    Custom cursor accent (subtle, desktop only)
    ========================================================================== */
 .cursor-dot {
@@ -616,8 +641,20 @@ a {
    behind the photo rather than boxing it in. */
 .story-media-pair {
   position: relative;
-  max-height: min(560px, calc(100vh - 160px));
+  max-height: min(560px, calc(100vh - 220px));
   margin: 0 auto;
+}
+.story-media-pair::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  bottom: 40px;
+  left: 40px;
+  border-top: 1px solid var(--line-on-light);
+  border-right: 1px solid var(--line-on-light);
+  z-index: 0;
+  pointer-events: none;
 }
 .story-block-full--reverse .story-media-pair::before {
   right: 40px;
@@ -627,7 +664,7 @@ a {
 }
 .story-media-pair .story-figure--tall {
   aspect-ratio: 9 / 16;
-  height: min(560px, calc(100vh - 160px));
+  height: min(560px, calc(100vh - 220px));
   width: auto;
   max-width: 100%;
   position: relative;
@@ -654,12 +691,24 @@ a {
 
 .story-media-single {
   position: relative;
-  max-height: min(560px, calc(100vh - 160px));
+  max-height: min(560px, calc(100vh - 220px));
   margin: 0 auto;
+}
+.story-media-single::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  bottom: 40px;
+  left: 40px;
+  border-top: 1px solid var(--line-on-light);
+  border-right: 1px solid var(--line-on-light);
+  z-index: 0;
+  pointer-events: none;
 }
 .story-media-single .story-figure--tall {
   aspect-ratio: 9 / 16;
-  height: min(560px, calc(100vh - 160px));
+  height: min(560px, calc(100vh - 220px));
   width: auto;
   max-width: 100%;
   position: relative;

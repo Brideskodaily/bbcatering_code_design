@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         when they cross into the viewport. Staggered by DOM order within
         their nearest common container.
   --------------------------------------------------------------------- */
-  const revealSelectors = '.reveal-fade, .reveal-up, .reveal-scale, .reveal-line';
+  const revealSelectors = '.reveal-fade, .reveal-up, .reveal-scale, .reveal-line, .family-photo-reveal';
   const revealEls = document.querySelectorAll(revealSelectors);
 
   if ('IntersectionObserver' in window) {

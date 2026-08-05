@@ -175,6 +175,10 @@
         <video autoplay muted loop playsinline preload="auto">
           <source src="https://pub-b56ad53318b444369f1eda44267ab2a8.r2.dev/BB_video_onas.mp4" type="video/mp4">
         </video>
+      </figure>
+      <figure class="story-figure story-figure--overlap reveal-scale">
+        <img src="assets/obr_1_2.png" alt="Fine dining taniere BB Catering">
+      </figure>
     </div>
 
     <div class="story-copy reveal-up">
@@ -198,9 +202,12 @@
     </div>
   </div>
 
-  <!-- Story block 2 — family/team photo pair, no heading -->
+  <!-- Story block 2 — family/team photo, no heading. Uses its own
+       dedicated .family-photo-reveal class (fade + scale on scroll-in)
+       rather than the shared .reveal-scale, so this specific photo can
+       be tuned independently later without touching other reveals. -->
   <div class="story-block-full story-block-full--media-only">
-    <figure class="story-figure story-figure--wide reveal-scale">
+    <figure class="story-figure story-figure--wide family-photo-reveal">
       <img src="assets/obr_2_1.png" alt="Rodina a tím BB Catering">
     </figure>
   </div>
@@ -222,6 +229,9 @@
     <div class="story-media-pair">
       <figure class="story-figure story-figure--tall reveal-scale">
         <img src="assets/obr_3_1.png" alt="Šéfkuchárka pri grile">
+      </figure>
+      <figure class="story-figure story-figure--overlap-bottom reveal-scale">
+        <img src="assets/obr_3_2.png" alt="Detail jedla na tanieri">
       </figure>
     </div>
   </div>
