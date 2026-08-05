@@ -616,7 +616,7 @@ a {
    behind the photo rather than boxing it in. */
 .story-media-pair {
   position: relative;
-  max-height: min(560px, calc(100vh - 220px));
+  max-height: min(560px, calc(100vh - 160px));
   margin: 0 auto;
 }
 .story-block-full--reverse .story-media-pair::before {
@@ -654,12 +654,12 @@ a {
 
 .story-media-single {
   position: relative;
-  max-height: min(560px, calc(100vh - 220px));
+  max-height: min(560px, calc(100vh - 160px));
   margin: 0 auto;
 }
 .story-media-single .story-figure--tall {
   aspect-ratio: 9 / 16;
-  height: min(560px, calc(100vh - 220px));
+  height: min(560px, calc(100vh - 160px));
   width: auto;
   max-width: 100%;
   position: relative;
