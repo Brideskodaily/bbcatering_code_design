@@ -24,25 +24,7 @@
     </a>
     <a href="#kontakt" class="nav-link">Kontakt</a>
     <a href="#partnerstva" class="nav-link">Partnerstvá</a>
-
-    <button class="nav-burger" id="navBurger" aria-label="Otvoriť menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
   </nav>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#referencie" class="mobile-menu-link">Referencie</a>
-    <a href="#o-nas" class="mobile-menu-link">O nás</a>
-    <a href="#kontakt" class="mobile-menu-link">Kontakt</a>
-    <a href="#partnerstva" class="mobile-menu-link">Partnerstvá</a>
- <div class="mobile-menu-social">
-  <a href="https://www.instagram.com/chef_barbora_belanova/" target="_blank" rel="noopener" aria-label="Instagram">
-    <img src="assets/48px_logo-instagram.svg" alt="" class="social-icon">
-  </a>
-</div>
-  </div>
 </header>
 
 <!-- ============ HERO ============ -->
@@ -94,14 +76,15 @@
   </div>
 
   <div class="hero-content">
-    <p class="hero-eyebrow reveal-fade">— Catering na mieru · všade tam, kde nás pozvete</p>
+    <p class="hero-eyebrow reveal-fade">— CATERING NA MIERU — VŠADE TAM KDE NAJVIAC ZÁLEŽÍ</p>
     <h1 class="hero-title">
-  <span class="line reveal-line"><span class="ink">Varíme len jedno menu.</span></span>
-  <span class="line reveal-line"><span class="ink">To vaše.</span></span>
-</h1>
+      <span class="line reveal-line"><span class="ink">Premeníme</span> váš event</span>
+      <span class="line reveal-line">na <em class="ink-em">fine dining</em> zážitok</span>
+    </h1>
     <p class="hero-sub reveal-fade">
-      Neponúkame hotové balíčky ani univerzálne riešenia. Najskôr chceme spoznať vás, vaše predstavy a atmosféru, 
-      ktorú chcete vytvoriť. Až potom navrhujeme menu, servis a každý detail vášho eventu.
+      Rodinný catering s dôrazom na kvalitu, osobný prístup a chute,
+      ktoré si zapamätáte. Varíme naživo, z toho najlepšieho, čo
+      ponúkajú slovenské farmy.
     </p>
     <div class="hero-cta reveal-fade">
       <a href="#kontakt" class="btn btn-primary">Kontakt</a>
@@ -116,80 +99,76 @@
   </div>
 </section>
 
-<!-- ============ INTRO STATEMENT (color-shift-on-scroll text) ============ -->
+<!-- ============ INTRO STATEMENT (sticky fullscreen, color-shift-on-scroll) ============ -->
 <section class="statement" id="o-nas">
-  <div class="statement-inner">
-    <img src="assets/Logo-male.svg" alt="BB Catering" class="statement-mark">
-    <div class="statement-rule"></div>
+  <div class="statement-scroll-space">
+    <div class="statement-sticky">
+      <div class="statement-inner">
+        <svg viewBox="0 0 60 46" class="statement-mark" aria-hidden="true">
+          <text x="0" y="36" class="logo-letter">B</text>
+          <text x="26" y="36" class="logo-letter">B</text>
+        </svg>
+        <div class="statement-rule"></div>
 
-   <p class="statement-text" data-scroll-color>
-  <span class="word-strong">Každý</span> <span class="word-strong">event</span> <span class="word-strong">začína</span> <span class="word-strong">prázdnym</span> <span class="word-strong">papierom.</span> <span class="word">Počúvame</span> <span class="word">vaše</span> <span class="word">predstavy,</span> <span class="word">navrhujeme</span> <span class="word">menu,</span> <span class="word">vyberáme</span> <span class="word">suroviny</span> <span class="word">a</span> <span class="word">vytvárame</span> <span class="word">atmosféru,</span> <span class="word">ktorá</span> <span class="word">bude</span> <span class="word">prirodzenou</span> <span class="word">súčasťou</span> <span class="word">vášho</span> <span class="word">príbehu.</span>
-</p>
-  </div>
-
-  <!-- ============ TEAM CAROUSEL (zlúčené so statement) ============ -->
-<div class="team-layout">
-  <div class="team-header reveal-up">
-    <h2 class="team-title">Toto je náš tím</h2>
-    <div class="team-nav">
-      <button class="team-arrow" id="teamPrev" aria-label="Predošlý člen tímu">
-        <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-      </button>
-      <button class="team-arrow" id="teamNext" aria-label="Ďalší člen tímu">
-        <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-      </button>
+        <p class="statement-text" data-scroll-color>
+          <span class="word-strong">Každý</span> <span class="word-strong">event</span> <span class="word-strong">začína</span> <span class="word-strong">prázdnym</span> <span class="word-strong">papierom.</span> <span class="word">Počúvame</span> <span class="word">vaše</span> <span class="word">predstavy,</span> <span class="word">navrhujeme</span> <span class="word">menu,</span> <span class="word">vyberáme</span> <span class="word">suroviny</span> <span class="word">a</span> <span class="word">vytvárame</span> <span class="word">atmosféru,</span> <span class="word">ktorá</span> <span class="word">bude</span> <span class="word">prirodzenou</span> <span class="word">súčasťou</span> <span class="word">vášho</span> <span class="word">príbehu.</span>
+        </p>
+      </div>
     </div>
   </div>
 
-  <div class="team-track" id="teamTrack">
-    <article class="team-card reveal-up">
-      <div class="team-photo">
-        <img src="assets/foto_tim.jpg" alt="Barbora Belanová" loading="lazy" class="team-photo-bw">
-<img src="assets/foto_tim_color1.jpg" alt="Barbora Belanová" loading="lazy" class="team-photo-color">
-      </div>
-      <div class="team-caption">
-        <span class="team-role">— CHEF</span>
-        <h3 class="team-name">Barbora Belanová</h3>
-      </div>
-    </article>
+  <!-- ============ TEAM (fullscreen, static 4-up grid, no scrolling) ============ -->
+  <div class="team-fullscreen">
+    <div class="team-header reveal-up">
+      <h2 class="team-title">Toto je náš tím</h2>
+    </div>
 
-    <article class="team-card reveal-up">
-      <div class="team-photo">
-        <img src="assets/foto_tim_2.jpg" alt="Pán Belan" loading="lazy" class="team-photo-bw">
-<img src="assets/foto_tim_color2.jpg" alt="Pán Belan" loading="lazy" class="team-photo-color">
-      </div>
-      <div class="team-caption">
-        <span class="team-role">— CHEF</span>
-        <h3 class="team-name">Pán Belan</h3>
-      </div>
-    </article>
+    <div class="team-grid" id="teamTrack">
+      <article class="team-card reveal-up">
+        <div class="team-photo">
+          <img src="assets/chef-barbora.jpg" alt="Barbora Belanová" loading="lazy" class="team-photo-bw">
+          <img src="assets/chef-barbora.jpg" alt="Barbora Belanová" loading="lazy" class="team-photo-color">
+        </div>
+        <div class="team-caption">
+          <span class="team-role">— ŠÉF KUCHÁR / DCÉRA</span>
+          <h3 class="team-name">Barbora Belanová</h3>
+        </div>
+      </article>
 
-    <article class="team-card reveal-up">
-      <div class="team-photo">
-        <img src="assets/foto_tim_3.jpg" alt="Pani Belanová" loading="lazy" class="team-photo-bw">
-<img src="assets/foto_tim_color3.jpg" alt="Pani Belanová" loading="lazy" class="team-photo-color">
-      </div>
-      <div class="team-caption">
-        <span class="team-role">— CHEF</span>
-        <h3 class="team-name">Pani Belanová</h3>
-      </div>
-    </article>
+      <article class="team-card reveal-up">
+        <div class="team-photo">
+          <img src="assets/chef-belan.jpg" alt="Pán Černák" loading="lazy" class="team-photo-bw">
+          <img src="assets/chef-belan.jpg" alt="Pán Černák" loading="lazy" class="team-photo-color">
+        </div>
+        <div class="team-caption">
+          <span class="team-role">— GRIL MAJSTER / OTEC</span>
+          <h3 class="team-name">Pán Černák</h3>
+        </div>
+      </article>
 
-    <article class="team-card reveal-up">
-      <div class="team-photo">
-        <img src="assets/foto_tim_3.jpg" alt="Pani Belanová" loading="lazy" class="team-photo-bw">
-<img src="assets/foto_tim_color3.jpg" alt="Pani Belanová" loading="lazy" class="team-photo-color">
-      </div>
-      <div class="team-caption">
-        <span class="team-role">— SERVIS</span>
-        <h3 class="team-name">Náš tím</h3>
-      </div>
-    </article>
+      <article class="team-card reveal-up">
+        <div class="team-photo">
+          <img src="assets/chef-pani-belanova.jpg" alt="Pani Černáková" loading="lazy" class="team-photo-bw">
+          <img src="assets/chef-pani-belanova.jpg" alt="Pani Černáková" loading="lazy" class="team-photo-color">
+        </div>
+        <div class="team-caption">
+          <span class="team-role">— EVENT ŠTYLISTA / MAMA</span>
+          <h3 class="team-name">Pani Černáková</h3>
+        </div>
+      </article>
+
+      <article class="team-card reveal-up">
+        <div class="team-photo">
+          <img src="assets/chef-fourth.jpg" alt="Servisný tím BB Catering" loading="lazy" class="team-photo-bw">
+        </div>
+        <div class="team-caption">
+          <span class="team-role">— SERVIS</span>
+          <h3 class="team-name">Náš tím</h3>
+        </div>
+      </article>
+    </div>
   </div>
-</div>
 </section>
-
-<!-- ============ STORY BLOCK 1 — Sme rodina ============ -->
 <section class="story">
   <div class="story-block story-block--one">
     <figure class="story-figure story-figure--tall reveal-scale">

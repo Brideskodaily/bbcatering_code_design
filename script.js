@@ -28,29 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', onHeaderScroll, { passive: true });
 
   /* ---------------------------------------------------------------------
-     1b) HAMBURGER MENU — toggle the mobile panel open/closed
-  --------------------------------------------------------------------- */
-  const navBurger = document.getElementById('navBurger');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  const closeMobileMenu = () => {
-    navBurger.classList.remove('is-open');
-    mobileMenu.classList.remove('is-open');
-    navBurger.setAttribute('aria-expanded', 'false');
-  };
-
-  navBurger.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.toggle('is-open');
-    navBurger.classList.toggle('is-open', isOpen);
-    navBurger.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  // Close the menu whenever a link inside it is clicked (navigating away)
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMobileMenu);
-  });
-
-  /* ---------------------------------------------------------------------
      2) HERO VIDEO GRID — the 3rd cell is CSS-hidden ≤900px, the 2nd cell
         is also hidden ≤600px (see style.css). Hidden videos would still
         keep playing/decoding in the background otherwise, so mirror the
@@ -119,18 +96,22 @@ document.addEventListener('DOMContentLoaded', () => {
   if (scrollColorEl) {
     // wrap every already-marked .word / .word-strong — they exist in HTML.
     const words = Array.from(scrollColorEl.querySelectorAll('.word, .word-strong'));
-    const section = scrollColorEl.closest('section');
+    // Track the scroll-space wrapper (not the whole <section>): its height
+    // is exactly how far the user scrolls while the text is pinned via
+    // position:sticky, so progress 0->1 across it maps directly to how much
+    // of that pinned scroll has happened.
+    const scrollSpace = document.querySelector('.statement-scroll-space') || scrollColorEl.closest('section');
 
     const updateStatementColor = () => {
-      const rect = section.getBoundingClientRect();
+      const rect = scrollSpace.getBoundingClientRect();
       const vh = window.innerHeight;
 
-      // progress 0 -> 1 as section moves from "just entered bottom"
-      // to "about to leave top", biased so the effect completes while
-      // the block is comfortably centered on screen.
-      const start = vh * 0.85;
-      const end = vh * 0.15 - rect.height * 0.35;
-      const raw = (start - rect.top) / (start - end);
+      // The element is pinned (sticky top:0) for exactly the scroll range
+      // where rect.top goes from 0 down to -(rect.height - vh). Map progress
+      // 0->1 across only that pinned range, so lighting starts the instant
+      // the text locks in place and finishes the instant it releases.
+      const pinnedDistance = rect.height - vh;
+      const raw = -rect.top / (pinnedDistance > 0 ? pinnedDistance : 1);
       const progress = Math.min(1, Math.max(0, raw));
 
       const litCount = Math.floor(progress * words.length);
@@ -195,41 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach(el => revealObserver.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('is-visible'));
-  }
-
-  /* ---------------------------------------------------------------------
-     6) TEAM CAROUSEL — prev/next scroll by one card width
-  --------------------------------------------------------------------- */
-  const track = document.getElementById('teamTrack');
-  const prevBtn = document.getElementById('teamPrev');
-  const nextBtn = document.getElementById('teamNext');
-
-  if (track && prevBtn && nextBtn) {
-    const scrollByCard = (dir) => {
-      const card = track.querySelector('.team-card');
-      const gap = 24;
-      const distance = card ? card.getBoundingClientRect().width + gap : 320;
-      track.scrollBy({ left: dir * distance, behavior: 'smooth' });
-    };
-    prevBtn.addEventListener('click', () => scrollByCard(-1));
-    nextBtn.addEventListener('click', () => scrollByCard(1));
-    
-    // Match .team-header's height to the first photo's height (not the whole
-  // card, which also includes the caption below it) so the title's top
-  // edge and the arrows' bottom edge line up exactly with the photo row.
-  const teamHeader = document.querySelector('.team-header');
-  const firstTeamPhoto = document.querySelector('.team-photo');
-  const syncTeamHeaderHeight = () => {
-    if (!teamHeader || !firstTeamPhoto) return;
-    if (window.innerWidth <= 900) {
-      teamHeader.style.height = '';
-    } else {
-      teamHeader.style.height = firstTeamPhoto.getBoundingClientRect().height + 'px';
-    }
-  };
-  syncTeamHeaderHeight();
-  window.addEventListener('resize', syncTeamHeaderHeight);
-  window.addEventListener('load', syncTeamHeaderHeight);
   }
 
   /* ---------------------------------------------------------------------
