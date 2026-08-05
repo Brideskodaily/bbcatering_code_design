@@ -609,31 +609,39 @@ a {
 }
 
 /* Media pair: a tall figure with a second, smaller figure overlapping
-   its bottom corner — used in blocks 1 and 3. A thin frame line sits
-   behind the tall photo, offset 40px up and 40px toward the outer edge
-   (away from the copy column) — a simple decorative double-frame effect. */
+   its bottom corner — used in blocks 1 and 3. A thin frame sits behind
+   the tall photo, offset 40px up and 40px toward the outer edge (away
+   from the copy column) — only the top and outer-side lines are drawn
+   (no bottom, no inner side), so the frame reads as peeking out from
+   behind the photo rather than boxing it in. */
 .story-media-pair {
   position: relative;
-  max-height: calc(100vh - 128px);
+  max-height: min(560px, calc(100vh - 220px));
+  margin: 0 auto;
 }
 .story-media-pair::before {
   content: "";
   position: absolute;
   top: -40px;
   right: -40px;
-  bottom: 0;
+  bottom: 40px;
   left: 40px;
-  border: 1px solid var(--line-on-light);
+  border-top: 1px solid var(--line-on-light);
+  border-right: 1px solid var(--line-on-light);
   z-index: 0;
   pointer-events: none;
 }
 .story-block-full--reverse .story-media-pair::before {
   right: 40px;
   left: -40px;
+  border-right: none;
+  border-left: 1px solid var(--line-on-light);
 }
 .story-media-pair .story-figure--tall {
-  aspect-ratio: 3 / 4;
-  max-height: calc(100vh - 128px);
+  aspect-ratio: 9 / 16;
+  height: min(560px, calc(100vh - 220px));
+  width: auto;
+  max-width: 100%;
   position: relative;
   z-index: 1;
 }
@@ -658,21 +666,26 @@ a {
 
 .story-media-single {
   position: relative;
+  max-height: min(560px, calc(100vh - 220px));
+  margin: 0 auto;
 }
 .story-media-single::before {
   content: "";
   position: absolute;
   top: -40px;
   right: -40px;
-  bottom: 0;
+  bottom: 40px;
   left: 40px;
-  border: 1px solid var(--line-on-light);
+  border-top: 1px solid var(--line-on-light);
+  border-right: 1px solid var(--line-on-light);
   z-index: 0;
   pointer-events: none;
 }
 .story-media-single .story-figure--tall {
-  aspect-ratio: 3 / 4;
-  max-height: calc(100vh - 128px);
+  aspect-ratio: 9 / 16;
+  height: min(560px, calc(100vh - 220px));
+  width: auto;
+  max-width: 100%;
   position: relative;
   z-index: 1;
 }
