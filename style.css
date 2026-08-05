@@ -20,6 +20,10 @@
   --ink: #1c2420;
   --ink-soft: #4a5048;
   --paper-muted: #b6b0a2;
+  --statement-bg: #a89785;
+  --statement-lit: #fff4e4;
+  --statement-unlit: #897969;
+  --statement-logo: #3d3120;
   --sage: #93a08f;
   --gold: #a9884f;
   --gold-bright: #c7a866;
@@ -400,7 +404,7 @@ a {
    STATEMENT — scroll color-reveal text (Image 2 animation)
    ========================================================================== */
 .statement {
-  background: var(--cream);
+  background: var(--statement-bg);;
   padding: 140px clamp(20px, 5vw, 64px) 160px;
 }
 .statement-inner {
@@ -412,10 +416,10 @@ a {
   height: auto;
   margin-bottom: 40px;
 }
-.statement-mark .logo-letter { fill: var(--gold); }
+.statement-mark .logo-letter { fill: var(--statement-logo); }
 .statement-rule {
   height: 1px;
-  background: var(--line-on-light);
+  background: rgba(61, 49, 32, 0.18);
   margin-bottom: 56px;
 }
 .statement-text {
