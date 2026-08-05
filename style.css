@@ -404,8 +404,8 @@ a {
    STATEMENT — scroll color-reveal text (Image 2 animation)
    ========================================================================== */
 .statement {
-  background: var(--statement-bg);;
-  padding: 140px clamp(20px, 5vw, 64px) 160px;
+  background: var(--statement-bg);
+  padding: 140px 0 140px;
 }
 .statement-inner {
   max-width: 1200px;
@@ -450,17 +450,13 @@ a {
 /* ==========================================================================
    TEAM CAROUSEL — hover greyscale->color (Image 3 animation)
    ========================================================================== */
-.team {
-  background: var(--cream);
-  padding: 0 0 140px;
-}
 .team-layout {
   display: flex;
   align-items: flex-start;
   gap: 40px;
   max-width: 1400px;
-  margin: 0 auto;
-  padding-left: clamp(20px, 5vw, 64px);
+  margin: 96px auto 0;
+  padding: 0 clamp(20px, 5vw, 64px);
 }
 .team-header {
   display: flex;
