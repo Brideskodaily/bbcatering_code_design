@@ -230,4 +230,101 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mouseleave', () => cursor.classList.remove('is-active'));
   }
 
+  /* ---------------------------------------------------------------------
+     9) SECTION SNAP — Hero, Team, and the 4 story blocks each occupy one
+        full "scroll step": a single wheel/trackpad gesture jumps straight
+        to the next section, instead of scrolling through it gradually.
+
+        The statement text's own sticky-pin scroll (220vh scroll-space,
+        where the paragraph lights up word by word) is deliberately left
+        OUTSIDE this snap list — while the user is inside that range,
+        wheel input passes through untouched so the text-coloring scroll
+        stays smooth and gradual, exactly as before. Snapping resumes once
+        they reach the Team section that follows it.
+
+        Everything from Occasions onward is untouched normal scrolling.
+  --------------------------------------------------------------------- */
+  const statementScrollSpace = document.querySelector('.statement-scroll-space');
+  const snapZoneEnd = document.querySelector('.occasions')?.offsetTop ?? Infinity;
+
+  const getSnapPoints = () => {
+    const points = [];
+    const hero = document.querySelector('.hero');
+    const team = document.querySelector('.team-fullscreen');
+    const storyBlocks = document.querySelectorAll('.story-block-full');
+    const occasions = document.querySelector('.occasions');
+    if (hero) points.push(hero.offsetTop);
+    // Landing point just past Hero: the start of the statement's own
+    // sticky-scroll range. Scrolling down from Hero lands here, then the
+    // free-scroll zone check below takes over for the gradual text reveal.
+    if (statementScrollSpace) points.push(statementScrollSpace.offsetTop);
+    if (team) points.push(team.offsetTop);
+    storyBlocks.forEach(b => points.push(b.offsetTop));
+    // Final point: where normal scrolling resumes. Without this, the last
+    // story block has nowhere to advance to and gets pulled back to itself.
+    if (occasions) points.push(occasions.offsetTop);
+    return points.sort((a, b) => a - b);
+  };
+
+  let isSnapAnimating = false;
+  let wheelAccum = 0;
+  let wheelResetTimer = null;
+
+  const isInsideFreeScrollZone = (y) => {
+    // The statement-scroll-space's own sticky-pin range: while scrollY is
+    // within it, let the browser handle scrolling natively (no snapping),
+    // so the word-by-word color reveal stays gradual.
+    if (!statementScrollSpace) return false;
+    const top = statementScrollSpace.offsetTop;
+    const bottom = top + statementScrollSpace.offsetHeight;
+    return y > top + 10 && y < bottom - 10;
+  };
+
+  window.addEventListener('wheel', (e) => {
+    const y = window.scrollY;
+
+    // Past the snap zone (Occasions onward): do nothing, normal scroll.
+    if (y >= snapZoneEnd - 5) return;
+
+    // Inside the statement's own sticky-scroll range: let it scroll freely.
+    if (isInsideFreeScrollZone(y)) return;
+
+    if (isSnapAnimating) {
+      e.preventDefault();
+      return;
+    }
+
+    wheelAccum += e.deltaY;
+    clearTimeout(wheelResetTimer);
+    wheelResetTimer = setTimeout(() => { wheelAccum = 0; }, 150);
+
+    // Only trigger once the accumulated gesture is clearly intentional —
+    // avoids firing on tiny trackpad jitter.
+    if (Math.abs(wheelAccum) < 40) return;
+
+    const points = getSnapPoints();
+    const direction = wheelAccum > 0 ? 1 : -1;
+    wheelAccum = 0;
+    clearTimeout(wheelResetTimer);
+
+    // Find the "floor" point: the last snap point at or below the current
+    // scroll position. That's the section the user is currently standing
+    // in — the target is simply one step in the scroll direction from it.
+    let floorIndex = 0;
+    for (let i = 0; i < points.length; i++) {
+      if (points[i] <= y + 5) floorIndex = i;
+    }
+
+    let targetIndex = floorIndex + direction;
+    targetIndex = Math.max(0, Math.min(points.length - 1, targetIndex));
+
+    const targetY = points[targetIndex];
+    if (targetY === undefined || Math.abs(targetY - y) < 5) return;
+
+    e.preventDefault();
+    isSnapAnimating = true;
+    window.scrollTo({ top: targetY, behavior: 'smooth' });
+    setTimeout(() => { isSnapAnimating = false; }, 700);
+  }, { passive: false });
+
 });
