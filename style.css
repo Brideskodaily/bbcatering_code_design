@@ -564,8 +564,8 @@ a {
    normal scroll continues from one block straight into the next.
    ========================================================================== */
 .story {
-  background: var(--forest);
-  color: var(--cream);
+  background: var(--cream);
+  color: var(--ink);
   overflow: hidden;
 }
 
@@ -609,14 +609,33 @@ a {
 }
 
 /* Media pair: a tall figure with a second, smaller figure overlapping
-   its bottom corner — used in blocks 1 and 3. */
+   its bottom corner — used in blocks 1 and 3. A thin frame line sits
+   behind the tall photo, offset 40px up and 40px toward the outer edge
+   (away from the copy column) — a simple decorative double-frame effect. */
 .story-media-pair {
   position: relative;
   max-height: calc(100vh - 128px);
 }
+.story-media-pair::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  bottom: 0;
+  left: 40px;
+  border: 1px solid var(--line-on-light);
+  z-index: 0;
+  pointer-events: none;
+}
+.story-block-full--reverse .story-media-pair::before {
+  right: 40px;
+  left: -40px;
+}
 .story-media-pair .story-figure--tall {
   aspect-ratio: 3 / 4;
   max-height: calc(100vh - 128px);
+  position: relative;
+  z-index: 1;
 }
 .story-media-pair .story-figure--overlap {
   position: absolute;
@@ -637,9 +656,25 @@ a {
   z-index: 2;
 }
 
+.story-media-single {
+  position: relative;
+}
+.story-media-single::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  bottom: 0;
+  left: 40px;
+  border: 1px solid var(--line-on-light);
+  z-index: 0;
+  pointer-events: none;
+}
 .story-media-single .story-figure--tall {
   aspect-ratio: 3 / 4;
   max-height: calc(100vh - 128px);
+  position: relative;
+  z-index: 1;
 }
 
 .story-figure {
@@ -665,24 +700,24 @@ a {
   font-size: clamp(1.7rem, 2.8vw, 2.5rem);
   line-height: 1.14;
   margin: 0 0 24px;
-  color: var(--cream);
+  color: var(--ink);
 }
 .story-title em {
   font-style: italic;
-  color: var(--gold-bright);
+  color: var(--gold);
   font-weight: 400;
 }
 .story-text {
   font-size: 1rem;
   line-height: 1.55;
-  color: rgba(244,240,233,0.72);
+  color: var(--ink-soft);
   max-width: 38ch;
   margin: 0 0 10px;
 }
 .story-text:last-child { margin-bottom: 0; }
 .story-text em {
   font-style: italic;
-  color: var(--gold-bright);
+  color: var(--gold);
 }
 
 @media (max-width: 860px) {
