@@ -559,91 +559,87 @@ a {
 }
 
 /* ==========================================================================
-   STORY — big editorial image blocks on dark forest bg
+   STORY — 4 standalone fullscreen (100vh) editorial blocks on dark bg.
+   Each block centers its content vertically; no sticky/pin behavior —
+   normal scroll continues from one block straight into the next.
    ========================================================================== */
 .story {
   background: var(--forest);
   color: var(--cream);
-  padding: 120px 0;
   overflow: hidden;
 }
-.story-block {
-  position: relative;
-  max-width: 1400px;
-  margin: 0 auto 40px;
-  padding: 0 clamp(20px, 5vw, 64px);
-  display: grid;
-  gap: 24px;
-}
-.story-block--one {
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: start;
-}
-.story-block--one .story-figure--tall {
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  aspect-ratio: 3 / 4;
-}
-.story-block--one .story-figure--overlap {
-  grid-column: 1;
-  grid-row: 2;
-  width: 62%;
-  aspect-ratio: 4 / 3;
-  align-self: end;
-  margin-left: 8%;
-  transform: translateY(18%);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.45);
-  z-index: 2;
-}
-.story-block--one .story-copy {
-  grid-column: 2;
-  align-self: center;
-  padding-left: clamp(0px, 3vw, 40px);
-}
 
-.story-block--two {
-  grid-template-columns: 1fr;
-  margin-top: 96px;
-  margin-bottom: 96px;
+.story-block-full {
+  height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 64px clamp(20px, 5vw, 64px);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 24px;
+  overflow: hidden;
 }
-.story-block--two .story-figure--wide {
+/* Blocks 3 puts copy first in HTML but visually on the left is already
+   correct order; --reverse flips column order so copy sits on the left
+   and the media pair sits on the right, matching the design. */
+.story-block-full--reverse {
+  grid-template-columns: 0.9fr 1.1fr;
+}
+.story-block-full--reverse .story-copy { grid-column: 1; }
+.story-block-full--reverse .story-media-pair { grid-column: 2; }
+
+/* Block 2: media-only, no copy column — wide photo with a small
+   overlapping photo, centered as its own full-bleed moment. */
+.story-block-full--media-only {
+  grid-template-columns: 1fr;
+  position: relative;
+}
+.story-block-full--media-only .story-figure--wide {
   aspect-ratio: 21 / 9;
 }
-.story-block--two .story-figure--small {
+.story-block-full--media-only .story-figure--small {
   position: absolute;
   left: clamp(20px, 5vw, 64px);
-  bottom: -60px;
+  bottom: 15%;
   width: clamp(200px, 22vw, 300px);
   aspect-ratio: 4 / 3;
   box-shadow: 0 30px 60px rgba(0,0,0,0.5);
   z-index: 2;
 }
 
-.story-block--three {
-  grid-template-columns: 0.9fr 1.1fr;
-  align-items: start;
-  margin-top: 40px;
+/* Media pair: a tall figure with a second, smaller figure overlapping
+   its bottom corner — used in blocks 1 and 3. */
+.story-media-pair {
+  position: relative;
+  max-height: calc(100vh - 128px);
 }
-.story-block--three .story-copy {
-  grid-column: 1;
-  align-self: center;
-  padding-right: clamp(0px, 3vw, 40px);
-}
-.story-block--three .story-figure--tall {
-  grid-column: 2;
-  grid-row: 1 / span 2;
+.story-media-pair .story-figure--tall {
   aspect-ratio: 3 / 4;
+  max-height: calc(100vh - 128px);
 }
-.story-block--three .story-figure--overlap-bottom {
-  grid-column: 2;
-  width: 58%;
+.story-media-pair .story-figure--overlap {
+  position: absolute;
+  width: 62%;
   aspect-ratio: 4 / 3;
-  margin-left: -6%;
-  transform: translateY(-14%);
+  left: 8%;
+  bottom: -18%;
   box-shadow: 0 30px 60px rgba(0,0,0,0.45);
   z-index: 2;
-  justify-self: start;
-  align-self: end;
+}
+.story-media-pair .story-figure--overlap-bottom {
+  position: absolute;
+  width: 58%;
+  aspect-ratio: 4 / 3;
+  right: -6%;
+  bottom: -14%;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+  z-index: 2;
+}
+
+.story-media-single .story-figure--tall {
+  aspect-ratio: 3 / 4;
+  max-height: calc(100vh - 128px);
 }
 
 .story-figure {
@@ -651,22 +647,24 @@ a {
   overflow: hidden;
   border-radius: 2px;
 }
-.story-figure img {
+.story-figure img,
+.story-figure video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transform: scale(1.08);
   transition: transform 1.2s var(--ease-soft);
 }
-.story-figure:hover img { transform: scale(1.15); }
+.story-figure:hover img,
+.story-figure:hover video { transform: scale(1.15); }
 
-.story-copy .eyebrow { margin-bottom: 24px; }
+.story-copy .eyebrow { margin-bottom: 20px; }
 .story-title {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(1.9rem, 3.4vw, 2.9rem);
-  line-height: 1.16;
-  margin: 0 0 22px;
+  font-size: clamp(1.7rem, 2.8vw, 2.5rem);
+  line-height: 1.14;
+  margin: 0 0 24px;
   color: var(--cream);
 }
 .story-title em {
@@ -676,23 +674,40 @@ a {
 }
 .story-text {
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.55;
   color: rgba(244,240,233,0.72);
   max-width: 38ch;
-  margin: 0;
+  margin: 0 0 10px;
+}
+.story-text:last-child { margin-bottom: 0; }
+.story-text em {
+  font-style: italic;
+  color: var(--gold-bright);
 }
 
 @media (max-width: 860px) {
-  .story-block--one,
-  .story-block--three { grid-template-columns: 1fr; }
-  .story-block--one .story-figure--overlap,
-  .story-block--three .story-figure--overlap-bottom {
-    width: 70%;
-    margin-left: 10%;
+  .story-block-full,
+  .story-block-full--reverse {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 64px;
+    padding-bottom: 64px;
   }
-  .story-block--three .story-figure--tall { grid-column: 1; }
-  .story-block--three .story-copy { grid-column: 1; padding-right: 0; margin-top: 40px; order: 2; }
-  .story-block--two .story-figure--small { position: static; width: 70%; margin-top: -60px; margin-left: auto; margin-right: auto; }
+  .story-block-full--reverse .story-copy,
+  .story-block-full--reverse .story-media-pair {
+    grid-column: 1;
+  }
+  .story-media-pair .story-figure--overlap,
+  .story-media-pair .story-figure--overlap-bottom {
+    width: 70%;
+    left: 15%;
+    right: auto;
+  }
+  .story-block-full--media-only .story-figure--small {
+    position: static;
+    width: 70%;
+    margin: -60px auto 0;
+  }
 }
 
 /* ==========================================================================
