@@ -619,18 +619,6 @@ a {
   max-height: min(560px, calc(100vh - 220px));
   margin: 0 auto;
 }
-.story-media-pair::before {
-  content: "";
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  bottom: 40px;
-  left: 40px;
-  border-top: 1px solid var(--line-on-light);
-  border-right: 1px solid var(--line-on-light);
-  z-index: 0;
-  pointer-events: none;
-}
 .story-block-full--reverse .story-media-pair::before {
   right: 40px;
   left: -40px;
@@ -668,18 +656,6 @@ a {
   position: relative;
   max-height: min(560px, calc(100vh - 220px));
   margin: 0 auto;
-}
-.story-media-single::before {
-  content: "";
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  bottom: 40px;
-  left: 40px;
-  border-top: 1px solid var(--line-on-light);
-  border-right: 1px solid var(--line-on-light);
-  z-index: 0;
-  pointer-events: none;
 }
 .story-media-single .story-figure--tall {
   aspect-ratio: 9 / 16;
