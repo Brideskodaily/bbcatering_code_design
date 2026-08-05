@@ -96,11 +96,11 @@ a {
   will-change: transform;
 }
 .btn-primary {
-  background: var(--gold);
+  background: #545218;
   color: var(--forest-deep);
 }
 .btn-primary:hover {
-  background: var(--gold-bright);
+  background: #7e7d51;
   transform: translateY(-2px);
 }
 .btn-ghost {
@@ -297,7 +297,7 @@ a {
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold-bright);
+  color: #545218;
   font-weight: 600;
   margin: 0;
 }
