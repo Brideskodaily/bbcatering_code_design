@@ -416,7 +416,7 @@ a {
   height: auto;
   margin-bottom: 40px;
 }
-.statement-mark .logo-letter { fill: var(--statement-logo); }
+.statement-mark .logo-letter { fill: #3d3120 !important; }
 .statement-rule {
   height: 1px;
   background: rgba(61, 49, 32, 0.18);
