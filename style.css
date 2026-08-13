@@ -762,13 +762,25 @@ a {
   .story-block-full,
   .story-block-full--reverse {
     grid-template-columns: 1fr;
-    min-height: auto;
-    padding-top: 64px;
-    padding-bottom: 64px;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    padding-top: 72px;
+    padding-bottom: 72px;
+    row-gap: 40px;
   }
   .story-block-full--reverse .story-copy,
   .story-block-full--reverse .story-media-pair {
     grid-column: 1;
+  }
+  .story-media-pair,
+  .story-media-single {
+    max-height: none;
+  }
+  .story-media-pair .story-figure--tall,
+  .story-media-single .story-figure--tall {
+    height: auto;
+    max-height: 65vh;
   }
   .story-media-pair .story-figure--overlap,
   .story-media-pair .story-figure--overlap-bottom {
