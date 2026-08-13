@@ -74,7 +74,7 @@ a {
   font-weight: 600;
 }
 .eyebrow--center { justify-content: center; width: 100%; }
-.eyebrow--on-dark { color: var(--gold-bright); }
+.eyebrow--on-dark { color: #544B3D; }
 .eyebrow::before {
   content: "";
   display: inline-block;
