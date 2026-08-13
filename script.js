@@ -180,18 +180,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------------------------------------------------------------------
      7) CONTACT FORM — lightweight submit feedback (no backend wired up)
+        The submit button lives outside the <form> element (linked via its
+        form="contactForm" attribute) so it can sit in a separate panel row
+        alongside the Instagram link — so it's looked up by id rather than
+        as a descendant of the form.
   --------------------------------------------------------------------- */
   const form = document.getElementById('contactForm');
-  if (form) {
+  const submitBtn = document.querySelector('.btn-submit');
+  if (form && submitBtn) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const btn = form.querySelector('.btn-submit');
-      const original = btn.innerHTML;
-      btn.innerHTML = '<span class="arrow">✓</span> Odoslané';
-      btn.style.pointerEvents = 'none';
+      const original = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<span class="arrow">✓</span> odoslané';
+      submitBtn.style.pointerEvents = 'none';
       setTimeout(() => {
-        btn.innerHTML = original;
-        btn.style.pointerEvents = '';
+        submitBtn.innerHTML = original;
+        submitBtn.style.pointerEvents = '';
         form.reset();
       }, 2400);
     });

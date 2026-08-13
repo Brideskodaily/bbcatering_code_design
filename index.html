@@ -353,34 +353,51 @@
 <!-- ============ CONTACT / FOOTER ============ -->
 <footer class="contact" id="kontakt">
   <div class="contact-bg" data-parallax></div>
-  <div class="contact-scrim"></div>
 
-  <div class="contact-inner">
-    <h2 class="contact-title reveal-up">Máte v hlave nejakú predstavu?<br>Radi si ju vypočujeme.</h2>
+  <div class="contact-panel reveal-up">
+    <div class="contact-panel-top">
+      <div class="contact-intro">
+        <img src="assets/Logo-male.svg" alt="BB Catering" class="contact-logo">
+        <h2 class="contact-title">Povedzte nám svoju predstavu.<br>O všetko ostatné sa postaráme my.</h2>
+      </div>
 
-    <form class="contact-form reveal-up" id="contactForm">
-      <div class="form-row">
-        <div class="form-field">
-          <input type="text" id="fname" name="fname" required placeholder=" ">
-          <label for="fname">Meno a priezvisko</label>
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-field">
+            <input type="text" id="fname" name="fname" required placeholder=" ">
+            <label for="fname">Krstné meno</label>
+          </div>
+          <div class="form-field">
+            <input type="text" id="flastname" name="flastname" required placeholder=" ">
+            <label for="flastname">Priezvisko</label>
+          </div>
         </div>
-        <div class="form-field">
+        <div class="form-field form-field--full">
           <input type="email" id="femail" name="femail" required placeholder=" ">
           <label for="femail">E-mail</label>
         </div>
-      </div>
-      <div class="form-field form-field--full">
-        <textarea id="fmsg" name="fmsg" rows="3" required placeholder=" "></textarea>
-        <label for="fmsg">Napíšte nám o vašej predstave alebo o pripravovanej akcii...</label>
-      </div>
-      <button type="submit" class="btn btn-primary btn-submit">
-        <span class="arrow">→</span> Odoslať
+        <div class="form-field form-field--full">
+          <textarea id="fmsg" name="fmsg" rows="2" required placeholder=" "></textarea>
+          <label for="fmsg">Správa</label>
+        </div>
+      </form>
+    </div>
+
+    <div class="contact-panel-bottom">
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor"/></svg>
+        sledujte nás na instagrame
+      </a>
+
+      <button type="submit" form="contactForm" class="btn-submit">
+        <span class="arrow">→</span> odoslať
       </button>
-    </form>
+      <p class="contact-response-note">Odpovedáme do 2 pracovných dní</p>
+    </div>
 
     <div class="contact-footer-row">
-      <img src="assets/logo.svg" alt="BB Catering" class="footer-mark">
-      <p class="footer-meta">© 2026 BB Catering — Rodinný catering so slovenskou dušou</p>
+      <p class="footer-meta">© 2026 BB CATERING s.r.o.. Všetky práva vyhradené.</p>
+      <p class="footer-meta">Web vytvorila agentúra <a href="https://brides.digital" target="_blank" rel="noopener">brides digital</a></p>
     </div>
   </div>
 </footer>
