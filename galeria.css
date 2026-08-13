@@ -1,0 +1,366 @@
+/* ==========================================================================
+   GALÉRIA PAGE — styles specific to galeria.html.
+   Reuses design tokens (colors, fonts, easing) from style.css — this file
+   only adds what's new for this page.
+   ========================================================================== */
+
+body { background: var(--cream); }
+
+.nav-link.is-active {
+  opacity: 1;
+}
+.nav-link.is-active::after {
+  width: 100%;
+}
+
+/* ==========================================================================
+   HERO — cross-fading background slideshow, shorter than homepage hero
+   ========================================================================== */
+.gpage-hero {
+  position: relative;
+  height: 82svh;
+  min-height: 520px;
+  overflow: hidden;
+  background: #12140f;
+}
+.gpage-hero-media {
+  position: absolute;
+  inset: 0;
+}
+.gpage-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease-soft);
+}
+.gpage-hero-img.is-active { opacity: 1; }
+.gpage-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10,12,9,0.4) 0%, rgba(10,12,9,0.25) 40%, rgba(10,12,9,0.88) 100%);
+}
+.gpage-hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 22px;
+  padding: 0 clamp(20px, 5vw, 64px);
+  color: var(--cream);
+}
+.gpage-hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+  line-height: 1.08;
+  margin: 0;
+}
+.gpage-hero-sub {
+  max-width: 46ch;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(244,240,233,0.8);
+  margin: 0;
+}
+.gpage-hero-scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 1px;
+  height: 54px;
+  background: rgba(244,240,233,0.28);
+}
+.gpage-hero-scroll-cue span {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 30%;
+  background: var(--gold-bright);
+  animation: scrollCue 2.2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   FILTER BAR — sticky chip row
+   ========================================================================== */
+.gfilter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(244, 240, 233, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line-on-light);
+}
+.gfilter-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 18px clamp(20px, 5vw, 64px);
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.gfilter-inner::-webkit-scrollbar { display: none; }
+.gfilter-chip {
+  flex: 0 0 auto;
+  background: transparent;
+  border: 1px solid var(--line-on-light);
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  padding: 9px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.gfilter-chip:hover {
+  border-color: var(--gold);
+  color: var(--ink);
+}
+.gfilter-chip.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+
+/* ==========================================================================
+   WALL — CSS-columns masonry, click-to-open lightbox
+   ========================================================================== */
+.gwall {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 48px clamp(20px, 5vw, 64px) 100px;
+  column-count: 4;
+  column-gap: 16px;
+}
+.gtile {
+  display: block;
+  width: 100%;
+  margin: 0 0 16px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  break-inside: avoid;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+.gtile img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  transform: scale(1.01);
+  transition: transform 0.7s var(--ease-soft), filter 0.4s ease;
+}
+.gtile--tall img { aspect-ratio: 3 / 4.6; }
+.gtile--wide img { aspect-ratio: 5 / 4; }
+.gtile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10,12,9,0) 55%, rgba(10,12,9,0.35) 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.gtile:hover::after { opacity: 1; }
+.gtile:hover img { transform: scale(1.06); }
+.gtile:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+.gwall-empty {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 64px) 100px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+@media (max-width: 1100px) {
+  .gwall { column-count: 3; }
+}
+@media (max-width: 720px) {
+  .gwall { column-count: 2; column-gap: 12px; padding-top: 32px; }
+  .gtile { margin-bottom: 12px; }
+}
+@media (max-width: 460px) {
+  .gwall { column-count: 1; }
+  .gtile--tall img,
+  .gtile--wide img { aspect-ratio: 4 / 5; }
+}
+
+/* ==========================================================================
+   LIGHTBOX — fullscreen viewer with prev/next, swipe, keyboard
+   ========================================================================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lightbox-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 12, 9, 0.94);
+}
+.lightbox-stage {
+  position: relative;
+  z-index: 2;
+  max-width: min(1100px, 88vw);
+  max-height: 82vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-img {
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+}
+.lightbox-close,
+.lightbox-nav {
+  position: absolute;
+  z-index: 3;
+  background: rgba(244,240,233,0.08);
+  border: 1px solid rgba(244,240,233,0.24);
+  color: var(--cream);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s var(--ease);
+}
+.lightbox-close:hover,
+.lightbox-nav:hover {
+  background: rgba(244,240,233,0.18);
+}
+.lightbox-close {
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+}
+.lightbox-close svg { width: 18px; height: 18px; }
+.lightbox-nav {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+}
+.lightbox-nav:hover { transform: translateY(-50%) scale(1.06); }
+.lightbox-nav svg { width: 22px; height: 22px; }
+.lightbox-nav--prev { left: 24px; }
+.lightbox-nav--next { right: 24px; }
+.lightbox-meta {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 28px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: rgba(244,240,233,0.75);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+.lightbox-cat {
+  color: var(--gold-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+}
+
+@media (max-width: 720px) {
+  .lightbox-nav { width: 44px; height: 44px; }
+  .lightbox-nav--prev { left: 10px; }
+  .lightbox-nav--next { right: 10px; }
+  .lightbox-close { top: 16px; right: 16px; width: 38px; height: 38px; }
+  .lightbox-meta { bottom: 18px; }
+}
+
+/* ==========================================================================
+   CTA STRIP
+   ========================================================================== */
+.gcta {
+  background: var(--forest);
+  padding: 90px clamp(20px, 5vw, 64px);
+  text-align: center;
+}
+.gcta-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.gcta-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--cream);
+  margin: 0;
+}
+.gcta-text {
+  color: rgba(244,240,233,0.75);
+  margin: 0 0 10px;
+}
+
+/* ==========================================================================
+   SIMPLE FOOTER (page-specific, lighter than homepage contact footer)
+   ========================================================================== */
+.gpage-footer {
+  background: var(--forest-deep);
+  padding: 48px clamp(20px, 5vw, 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+.gpage-footer-logo {
+  width: 32px;
+  height: auto;
+  opacity: 0.9;
+}
+.gpage-footer .footer-meta {
+  font-size: 0.78rem;
+  color: rgba(244,240,233,0.55);
+  margin: 0;
+}
+.gpage-footer .footer-meta a {
+  color: rgba(244,240,233,0.8);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.gpage-footer .footer-meta a:hover { color: var(--gold-bright); }
