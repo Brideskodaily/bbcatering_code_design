@@ -614,11 +614,9 @@ a {
 .story-block-full--reverse .story-copy { grid-column: 1; }
 .story-block-full--reverse .story-media-pair { grid-column: 2; }
 
-/* Block 2: media-only, no copy column — wide photo with a small
-   overlapping photo, centered as its own full-bleed moment. */
-
-   
-..story-block-full--media-only {
+/* Block 2: media-only, no copy column — fullscreen family photo,
+   centered with floating text captions. */
+.story-block-full--media-only {
   grid-template-columns: 1fr;
   height: 100svh;
   min-height: 100svh;
