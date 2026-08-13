@@ -869,6 +869,12 @@ a {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  .occasion-tile:nth-child(5) {
+  grid-column: 2;
+}
+.occasion-tile:nth-child(6) {
+  grid-column: 3;
+}
 }
 .occasion-tile {
   position: relative;
