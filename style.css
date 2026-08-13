@@ -618,19 +618,21 @@ a {
    overlapping photo, centered as its own full-bleed moment. */
 .story-block-full--media-only {
   grid-template-columns: 1fr;
+  height: 100svh;
+  min-height: 100svh;
+  padding: 0;
   position: relative;
 }
 .story-block-full--media-only .story-figure--wide {
-  aspect-ratio: 21 / 9;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
 }
-.story-block-full--media-only .story-figure--small {
-  position: absolute;
-  left: clamp(20px, 5vw, 64px);
-  bottom: 15%;
-  width: clamp(200px, 22vw, 300px);
-  aspect-ratio: 4 / 3;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-  z-index: 2;
+.story-block-full--media-only .story-figure--wide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Media pair: a tall figure with a second, smaller figure overlapping
