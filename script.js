@@ -280,7 +280,14 @@ document.addEventListener('DOMContentLoaded', () => {
         they reach the Team section that follows it.
 
         Everything from Occasions onward is untouched normal scrolling.
+
+        Guarded to homepage-only sections: this whole block only wires up
+        when a .hero section exists on the page, since that structure
+        (Hero -> statement -> team -> story blocks -> occasions) is
+        specific to index.html and doesn't exist on other pages (e.g.
+        galeria.html), which should always just scroll normally.
   --------------------------------------------------------------------- */
+  if (document.querySelector('.hero')) {
   const statementScrollSpace = document.querySelector('.statement-scroll-space');
   const snapZoneEnd = document.querySelector('.occasions')?.offsetTop ?? Infinity;
 
@@ -363,5 +370,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: targetY, behavior: 'smooth' });
     setTimeout(() => { isSnapAnimating = false; }, 700);
   }, { passive: false });
+  } // end .hero guard
 
 });
