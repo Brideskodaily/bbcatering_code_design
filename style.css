@@ -21,6 +21,7 @@
   --ink-soft: #4a5048;
   --paper-muted: #b6b0a2;
   --statement-bg: #a89785;
+  --occasions-bg: #a89785;
   --statement-lit: #fff4e4;
   --statement-unlit: #897969;
   --statement-logo: #3d3120;
@@ -73,12 +74,13 @@ a {
   font-weight: 600;
 }
 .eyebrow--center { justify-content: center; width: 100%; }
+.eyebrow--on-dark { color: var(--gold-bright); }
 .eyebrow::before {
   content: "";
   display: inline-block;
   width: 22px;
   height: 1px;
-  background: var(--gold);
+  background: currentColor;
 }
 
 .btn {
@@ -840,6 +842,10 @@ a {
   background: var(--cream);
   padding: 140px clamp(20px, 5vw, 64px);
 }
+.occasions {
+  background: var(--occasions-bg);
+  padding: 120px clamp(20px, 5vw, 64px) 100px;
+}
 .occasions-header {
   text-align: center;
   max-width: 700px;
@@ -854,7 +860,8 @@ a {
   font-weight: 400;
   font-size: clamp(2rem, 4vw, 3.1rem);
   margin: 0;
-  color: var(--ink);
+  color: var(--statement-lit);
+  line-height: 1.25;
 }
 .occasions-grid {
   max-width: 1400px;
@@ -869,14 +876,14 @@ a {
   aspect-ratio: 3 / 4;
   overflow: hidden;
   border-radius: 2px;
-  border: 1px solid var(--line-on-light);
+  border: 1px solid rgba(61, 49, 32, 0.28);
   background: var(--forest-deep);
   transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
   will-change: transform;
 }
 .occasion-tile:hover {
   transform: translateY(-8px);
-  box-shadow: 0 24px 46px rgba(20,25,20,0.28);
+  box-shadow: 0 24px 46px rgba(20,15,10,0.32);
 }
 .occasion-img {
   position: absolute;
@@ -888,11 +895,13 @@ a {
   transition: transform 0.8s var(--ease-soft);
 }
 .occasion-tile:hover .occasion-img { transform: scale(1.09); }
-.occasion-overlay {
+.occasion-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10,12,9,0) 40%, rgba(10,12,9,0.82) 100%);
-  transition: opacity 0.45s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
 }
 .occasion-copy {
   position: absolute;
@@ -909,14 +918,24 @@ a {
 .occasion-copy p {
   font-size: 0.86rem;
   margin: 0;
-  color: rgba(244,240,233,0.75);
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  color: rgba(244,240,233,0.8);
 }
-.occasion-tile:hover .occasion-copy p {
-  opacity: 1;
-  transform: translateY(0);
+.occasions-quote {
+  position: relative;
+  text-align: center;
+  max-width: 900px;
+  margin: 88px auto 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+  color: var(--statement-lit);
+  line-height: 1.5;
+}
+.occasions-quote-mark {
+  display: block;
+  width: clamp(48px, 6vw, 72px);
+  height: auto;
+  margin: 0 auto 12px;
 }
 
 @media (max-width: 900px) {
