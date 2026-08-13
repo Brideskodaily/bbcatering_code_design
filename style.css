@@ -242,19 +242,80 @@ a {
 .nav-link:nth-child(4) { justify-self: start; }
 .nav-link:nth-child(5) { justify-self: end; }
 
+/* Mobile hamburger + Instagram icon */
+.nav-hamburger {
+  display: none;
+  width: 26px;
+  height: 20px;
+  position: relative;
+  justify-self: end;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.nav-hamburger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--cream);
+  transition: transform 0.35s var(--ease), opacity 0.25s ease, top 0.35s var(--ease);
+}
+.nav-hamburger span:nth-child(1) { top: 0; }
+.nav-hamburger span:nth-child(2) { top: 9px; }
+.nav-hamburger span:nth-child(3) { top: 18px; }
+.nav-hamburger.is-open span:nth-child(1) { top: 9px; transform: rotate(45deg); }
+.nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.is-open span:nth-child(3) { top: 9px; transform: rotate(-45deg); }
+
+.nav-mobile-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(14, 20, 15, 0.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+}
+.nav-mobile-panel.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.nav-mobile-link {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--cream);
+}
+.nav-mobile-social {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--gold-bright);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+}
+.nav-mobile-social svg { width: 20px; height: 20px; }
+
 @media (max-width: 720px) {
   .nav-inner {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
     justify-content: space-between;
   }
   .nav-logo { justify-self: start; order: -1; }
   .nav-link:nth-child(1),
   .nav-link:nth-child(2),
-  .nav-link:nth-child(4) { display: none; }
-  .nav-link:nth-child(5) {
-    justify-self: end;
-    grid-column: 2;
-  }
+  .nav-link:nth-child(4),
+  .nav-link:nth-child(5) { display: none; }
+  .nav-hamburger { display: block; }
 }
 .nav-link::after {
   content: "";
@@ -839,10 +900,6 @@ a {
    OCCASIONS — hover lift tiles (Image 4 animation)
    ========================================================================== */
 .occasions {
-  background: var(--cream);
-  padding: 140px clamp(20px, 5vw, 64px);
-}
-.occasions {
   background: var(--occasions-bg);
   padding: 120px clamp(20px, 5vw, 64px) 100px;
 }
@@ -946,6 +1003,10 @@ a {
 
 @media (max-width: 900px) {
   .occasions-grid { grid-template-columns: repeat(2, 1fr); }
+  .occasion-tile:nth-child(5),
+  .occasion-tile:nth-child(6) {
+    grid-column: auto;
+  }
 }
 @media (max-width: 520px) {
   .occasions-grid { grid-template-columns: 1fr; }

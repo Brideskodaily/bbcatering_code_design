@@ -179,6 +179,39 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------------------------------------------------------------------
+     6) MOBILE HAMBURGER MENU
+  --------------------------------------------------------------------- */
+  const hamburger = document.getElementById('navHamburger');
+  const mobilePanel = document.getElementById('navMobilePanel');
+
+  if (hamburger && mobilePanel) {
+    const closeMobileMenu = () => {
+      hamburger.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobilePanel.classList.remove('is-open');
+      document.body.style.overflow = '';
+    };
+    const openMobileMenu = () => {
+      hamburger.classList.add('is-open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobilePanel.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    hamburger.addEventListener('click', () => {
+      if (mobilePanel.classList.contains('is-open')) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    mobilePanel.querySelectorAll('[data-nav-mobile-link]').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+  }
+
+  /* ---------------------------------------------------------------------
      7) CONTACT FORM — lightweight submit feedback (no backend wired up)
         The submit button lives outside the <form> element (linked via its
         form="contactForm" attribute) so it can sit in a separate panel row
