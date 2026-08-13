@@ -616,23 +616,66 @@ a {
 
 /* Block 2: media-only, no copy column — wide photo with a small
    overlapping photo, centered as its own full-bleed moment. */
-.story-block-full--media-only {
+
+   
+..story-block-full--media-only {
   grid-template-columns: 1fr;
   height: 100svh;
   min-height: 100svh;
-  padding: 0;
+  padding: 64px clamp(20px, 5vw, 64px);
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.family-photo-frame {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 .story-block-full--media-only .story-figure--wide {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 16 / 9;
   margin: 0;
-  border-radius: 0;
+  border-radius: 2px;
 }
 .story-block-full--media-only .story-figure--wide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.family-photo-caption {
+  position: absolute;
+  z-index: 3;
+  width: clamp(140px, 16vw, 240px);
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
+}
+.family-photo-caption--top-left {
+  top: clamp(-36px, -4vw, -18px);
+  left: clamp(-24px, -3vw, -10px);
+  transform: rotate(-6deg);
+}
+.family-photo-caption--bottom-right {
+  bottom: clamp(-36px, -4vw, -18px);
+  right: clamp(-24px, -3vw, -10px);
+  transform: rotate(4deg);
+}
+
+@media (max-width: 700px) {
+  .family-photo-caption {
+    width: clamp(110px, 34vw, 160px);
+  }
+  .family-photo-caption--top-left {
+    top: clamp(-22px, -4vw, -12px);
+    left: clamp(-8px, -2vw, -4px);
+  }
+  .family-photo-caption--bottom-right {
+    bottom: clamp(-22px, -4vw, -12px);
+    right: clamp(-8px, -2vw, -4px);
+  }
 }
 
 /* Media pair: a tall figure with a second, smaller figure overlapping
@@ -761,7 +804,7 @@ a {
 }
 
 @media (max-width: 860px) {
-  .story-block-full,
+  .story-block-full:not(.story-block-full--media-only),
   .story-block-full--reverse {
     grid-template-columns: 1fr;
     height: auto;
@@ -789,11 +832,6 @@ a {
     width: 70%;
     left: 15%;
     right: auto;
-  }
-  .story-block-full--media-only .story-figure--small {
-    position: static;
-    width: 70%;
-    margin: -60px auto 0;
   }
 }
 
