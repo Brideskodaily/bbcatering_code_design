@@ -211,7 +211,7 @@ a {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  padding: 28px clamp(20px, 5vw, 64px);
+  padding: 40px clamp(20px, 5vw, 64px);
   transition: padding 0.5s var(--ease), background-color 0.5s var(--ease), backdrop-filter 0.5s var(--ease);
 }
 .site-header.is-scrolled {
