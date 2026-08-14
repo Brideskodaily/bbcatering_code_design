@@ -224,7 +224,7 @@ a {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr auto 1fr 1fr;
+  grid-template-columns: 1fr 1fr auto 1fr 1fr 1fr;
   align-items: center;
   column-gap: 20px;
 }
@@ -238,9 +238,10 @@ a {
   padding-bottom: 3px;
 }
 .nav-link:nth-child(1) { justify-self: start; }
-.nav-link:nth-child(2) { justify-self: end; }
-.nav-link:nth-child(4) { justify-self: start; }
+.nav-link:nth-child(2) { justify-self: start; }
+.nav-link:nth-child(4) { justify-self: end; }
 .nav-link:nth-child(5) { justify-self: end; }
+.nav-link:nth-child(6) { justify-self: end; }
 
 /* Mobile hamburger + Instagram icon */
 .nav-hamburger {
@@ -314,7 +315,8 @@ a {
   .nav-link:nth-child(1),
   .nav-link:nth-child(2),
   .nav-link:nth-child(4),
-  .nav-link:nth-child(5) { display: none; }
+  .nav-link:nth-child(5),
+  .nav-link:nth-child(6) { display: none; }
   .nav-hamburger { display: block; }
 }
 .nav-link::after {

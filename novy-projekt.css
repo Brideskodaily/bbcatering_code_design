@@ -1,0 +1,32 @@
+/* ==========================================================================
+   NOVÝ PROJEKT — minimal "coming soon" page
+   ========================================================================== */
+
+body { background: var(--forest-deep); }
+
+.nav-link.is-active { opacity: 1; }
+.nav-link.is-active::after { width: 100%; }
+
+.npage-hero {
+  min-height: 82svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 120px clamp(20px, 5vw, 64px) 60px;
+  text-align: center;
+}
+.npage-logo {
+  width: clamp(64px, 9vw, 96px);
+  height: auto;
+}
+.npage-text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--cream);
+  letter-spacing: 0.01em;
+  margin: 0;
+}

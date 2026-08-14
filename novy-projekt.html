@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Galéria — BB Catering</title>
+<title>Nový projekt — BB Catering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="galeria.css">
+<link rel="stylesheet" href="novy-projekt.css">
 </head>
 <body>
 
 <!-- ============ CUSTOM CURSOR ============ -->
 <div class="cursor-dot" aria-hidden="true"></div>
 
-<!-- ============ HEADER (same as homepage, links point back to index.html) ============ -->
+<!-- ============ HEADER (same as other pages, links point back to index.html) ============ -->
 <header class="site-header is-scrolled" id="siteHeader">
   <nav class="nav-inner">
     <a href="index.html#podujatia" class="nav-link">Podujatia</a>
@@ -24,8 +24,8 @@
       <img src="assets/logo.svg" alt="BB Catering" class="logo-mark">
     </a>
     <a href="#kontakt" class="nav-link">Kontakt</a>
-    <a href="galeria.html" class="nav-link is-active">Galéria</a>
-    <a href="novy-projekt.html" class="nav-link">Nový projekt</a>
+    <a href="galeria.html" class="nav-link">Galéria</a>
+    <a href="novy-projekt.html" class="nav-link is-active">Nový projekt</a>
     <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -45,76 +45,11 @@
   </a>
 </div>
 
-<!-- ============ GALLERY HERO ============ -->
-<section class="gpage-hero">
-  <div class="gpage-hero-media">
-    <img src="assets/gal_1.png" alt="" class="gpage-hero-img" data-hero-slide aria-hidden="true">
-    <img src="assets/gal_3.png" alt="" class="gpage-hero-img" data-hero-slide aria-hidden="true">
-    <img src="assets/gal_5.png" alt="" class="gpage-hero-img" data-hero-slide aria-hidden="true">
-  </div>
-  <div class="gpage-hero-scrim"></div>
-  <div class="gpage-hero-content">
-    <span class="eyebrow eyebrow--on-dark reveal-fade">— GALÉRIA AKCIÍ</span>
-    <h1 class="gpage-hero-title reveal-up">Momenty, ktoré<br>varíme naživo.</h1>
-    <p class="gpage-hero-sub reveal-fade">
-      Výber z našich svadieb, firemných eventov a rodinných osláv —
-      od prípravy na ohni po posledný tanier na stole.
-    </p>
-  </div>
-  <div class="gpage-hero-scroll-cue" aria-hidden="true"><span></span></div>
+<!-- ============ COMING SOON ============ -->
+<section class="npage-hero">
+  <img src="assets/logo.svg" alt="BB Catering" class="npage-logo reveal-fade">
+  <p class="npage-text reveal-up">Pripravujeme</p>
 </section>
-
-<!-- ============ FILTER BAR ============ -->
-<nav class="gfilter-bar" aria-label="Filter galérie podľa typu podujatia">
-  <div class="gfilter-inner">
-    <button class="gfilter-chip is-active" data-filter="all">Všetko</button>
-    <button class="gfilter-chip" data-filter="svadby">Svadby</button>
-    <button class="gfilter-chip" data-filter="firemne">Firemné eventy</button>
-    <button class="gfilter-chip" data-filter="rodinne">Rodinné oslavy</button>
-    <button class="gfilter-chip" data-filter="garden">Garden party</button>
-    <button class="gfilter-chip" data-filter="vip">VIP večere</button>
-    <button class="gfilter-chip" data-filter="degustacie">Degustácie</button>
-    <button class="gfilter-chip" data-filter="jedlo">Jedlo</button>
-  </div>
-</nav>
-
-<!-- ============ GALLERY GRID (masonry-style via CSS columns) ============ -->
-<section class="gwall" id="gwall">
-  <!-- Each tile: data-cat for filtering, data-index for lightbox lookup.
-       Placeholder images via inline SVG data-URIs (swap src for real photos
-       later — see the instructions after this file). Tile spans vary
-       (data-span) purely for visual rhythm in the masonry layout. -->
-</section>
-
-<div class="gwall-empty" id="gwallEmpty" hidden>
-  <p>V tejto kategórii zatiaľ nemáme fotky. Skúste iný filter.</p>
-</div>
-
-<!-- ============ LIGHTBOX ============ -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <div class="lightbox-scrim" data-lightbox-close></div>
-
-  <button class="lightbox-close" id="lightboxClose" aria-label="Zavrieť galériu">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg>
-  </button>
-
-  <button class="lightbox-nav lightbox-nav--prev" id="lightboxPrev" aria-label="Predchádzajúca fotka">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7"/></svg>
-  </button>
-
-  <div class="lightbox-stage" id="lightboxStage">
-    <img src="" alt="" class="lightbox-img" id="lightboxImg">
-  </div>
-
-  <button class="lightbox-nav lightbox-nav--next" id="lightboxNext" aria-label="Ďalšia fotka">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7"/></svg>
-  </button>
-
-  <div class="lightbox-meta">
-    <span class="lightbox-count"><span id="lightboxCurrent">1</span> / <span id="lightboxTotal">1</span></span>
-    <span class="lightbox-cat" id="lightboxCat">Svadby</span>
-  </div>
-</div>
 
 <!-- ============ CONTACT / FOOTER (identical to homepage) ============ -->
 <footer class="contact" id="kontakt">
@@ -169,6 +104,5 @@
 </footer>
 
 <script src="script.js"></script>
-<script src="galeria.js"></script>
 </body>
 </html>
