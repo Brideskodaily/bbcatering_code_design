@@ -12,11 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------------------------------------------------------------------
      1) PHOTO DATA
-     Each entry: src (placeholder for now), alt, cat (must match a
-     data-filter value in the filter bar), span (tile size for masonry
-     rhythm: 'tall' | 'wide' | '' normal).
-     TO GO LIVE: replace every src with a real photo path in assets/, and
-     alt with a real description. Keep cat matching the filter chips.
+     One entry per photo: { src, alt, cat, span }
+       - src:  path to the image in assets/ (or a placeholder — see below)
+       - alt:  short description (used for accessibility + lightbox label)
+       - cat:  must match a data-filter value in the filter bar (and a key
+               in CATS below)
+       - span: 'tall' | 'wide' | '' — controls tile size in the masonry
+               layout, purely visual, pick whatever reads well
+
+     TO ADD REAL PHOTOS: drop the file in assets/, then add one object to
+     the PHOTOS array below (copy an existing line and edit it). To add a
+     photo to an existing category, just add a new object with that same
+     cat value anywhere in the list — order in the list = order on the
+     wall (within "Všetko"; filtering by category preserves this order).
   --------------------------------------------------------------------- */
   const CATS = {
     svadby:     'Svadby',
@@ -24,12 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
     rodinne:    'Rodinné oslavy',
     garden:     'Garden party',
     vip:        'VIP večere',
-    degustacie: 'Degustácie'
+    degustacie: 'Degustácie',
+    jedlo:      'Jedlo'
   };
 
-  // Placeholder tone per category so the wall reads with some rhythm even
-  // before real photos are dropped in — swap `src` for a real asset path
-  // per item; this placeholder-generator can be deleted once photos exist.
+  // Placeholder tone per category — used only for categories that don't
+  // have real photos yet (see placeholderSrc below). Once every category
+  // has real photos, PLACEHOLDER_TONES and placeholderSrc can be deleted
+  // along with the placeholder block further down.
   const PLACEHOLDER_TONES = {
     svadby:     ['#c9b8a3', '#a9884f'],
     firemne:    ['#8a8f88', '#4a5048'],
@@ -54,19 +64,37 @@ document.addEventListener('DOMContentLoaded', () => {
     return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
   }
 
-  const spans = ['', 'tall', '', 'wide', '', '', 'tall', ''];
-  const PHOTOS = [];
-  let counter = 0;
+  // ---- REAL PHOTOS -------------------------------------------------
+  // Add new photos here — one object per photo, in any order.
+  const PHOTOS = [
+    { src: 'assets/jedlo_1.jpg', alt: 'BB Catering — jedlo, fotka 1', cat: 'jedlo', span: '' },
+    { src: 'assets/jedlo_2.jpg', alt: 'BB Catering — jedlo, fotka 2', cat: 'jedlo', span: 'tall' },
+    { src: 'assets/jedlo_3.jpg', alt: 'BB Catering — jedlo, fotka 3', cat: 'jedlo', span: '' },
+    { src: 'assets/jedlo_4.jpg', alt: 'BB Catering — jedlo, fotka 4', cat: 'jedlo', span: 'wide' },
+    { src: 'assets/jedlo_5.jpg', alt: 'BB Catering — jedlo, fotka 5', cat: 'jedlo', span: '' },
+    { src: 'assets/jedlo_6.jpg', alt: 'BB Catering — jedlo, fotka 6', cat: 'jedlo', span: '' },
+    { src: 'assets/jedlo_7.jpg', alt: 'BB Catering — jedlo, fotka 7', cat: 'jedlo', span: 'tall' },
+    { src: 'assets/jedlo_8.jpg', alt: 'BB Catering — jedlo, fotka 8', cat: 'jedlo', span: '' }
+  ];
+
+  // ---- PLACEHOLDER PHOTOS (categories without real photos yet) -----
+  // Auto-fills 5 placeholder tiles for every category that has no real
+  // photos in the PHOTOS list above. As soon as a category gets its
+  // first real photo added above, its placeholders are skipped
+  // automatically — no need to remove anything by hand.
+  const catsWithRealPhotos = new Set(PHOTOS.map(p => p.cat));
+  const spans = ['', 'tall', '', 'wide', ''];
+  let seed = 0;
   Object.keys(CATS).forEach(cat => {
-    const count = 5; // 5 placeholder photos per category = 30 total
-    for (let i = 1; i <= count; i++) {
+    if (catsWithRealPhotos.has(cat)) return;
+    for (let i = 1; i <= 5; i++) {
       PHOTOS.push({
-        src: placeholderSrc(cat, counter),
+        src: placeholderSrc(cat, seed),
         alt: `${CATS[cat]} — BB Catering, fotka ${i}`,
         cat,
-        span: spans[counter % spans.length]
+        span: spans[seed % spans.length]
       });
-      counter++;
+      seed++;
     }
   });
 
