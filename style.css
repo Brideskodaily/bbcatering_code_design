@@ -309,6 +309,14 @@ a {
 }
 .nav-mobile-social svg { width: 20px; height: 20px; }
 
+.nav-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+}
+
 @media (max-width: 720px) {
   .nav-inner {
     justify-content: space-between;
@@ -339,13 +347,6 @@ a {
 }
 .nav-link:hover::after { width: 100%; }
 
-.nav-logo {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: block;
-}
 .logo-mark {
   width: 80px;
   height: 80px;
