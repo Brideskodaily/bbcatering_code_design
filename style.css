@@ -212,7 +212,8 @@ a {
   top: 0; left: 0; right: 0;
   z-index: 100;
   padding: 40px clamp(20px, 5vw, 64px);
-  transition: padding 0.5s var(--ease), background-color 0.5s var(--ease), backdrop-filter 0.5s var(--ease);
+  background: linear-gradient(180deg, rgba(10, 12, 9, 0.55) 0%, rgba(10, 12, 9, 0) 100%);
+  transition: padding 0.5s var(--ease), background 0.5s var(--ease), backdrop-filter 0.5s var(--ease);
 }
 .site-header.is-scrolled {
   padding: 16px clamp(20px, 5vw, 64px);
