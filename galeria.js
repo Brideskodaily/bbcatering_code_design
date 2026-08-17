@@ -1,6 +1,6 @@
 /* ==========================================================================
    GALÉRIA — filterable masonry wall + fullscreen lightbox
-   1) Photo data (placeholder set — swap `src` per item for real photos)
+   1) Photo data (real photos only)
    2) Render tiles into the wall
    3) Category filter (button chips)
    4) Lightbox: open on tile click, prev/next, keyboard, swipe, closes on
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------------------------------------------------------------------
      1) PHOTO DATA
      One entry per photo: { src, alt, cat, span }
-       - src:  path to the image in assets/ (or a placeholder — see below)
+       - src:  path to the image in assets/
        - alt:  short description (used for accessibility + lightbox label)
        - cat:  must match a data-filter value in the filter bar (and a key
                in CATS below)
@@ -36,34 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
     jedlo:      'Jedlo'
   };
 
-  // Placeholder tone per category — used only for categories that don't
-  // have real photos yet (see placeholderSrc below). Once every category
-  // has real photos, PLACEHOLDER_TONES and placeholderSrc can be deleted
-  // along with the placeholder block further down.
-  const PLACEHOLDER_TONES = {
-    svadby:     ['#c9b8a3', '#a9884f'],
-    firemne:    ['#8a8f88', '#4a5048'],
-    rodinne:    ['#b6a48f', '#897969'],
-    garden:     ['#93a08f', '#5c6b58'],
-    vip:        ['#3d3120', '#a9884f'],
-    degustacie: ['#6b5d4f', '#c7a866']
-  };
-
-  function placeholderSrc(cat, seed) {
-    const [c1, c2] = PLACEHOLDER_TONES[cat];
-    const svg = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000">
-        <defs>
-          <linearGradient id="g${seed}" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="${c1}"/>
-            <stop offset="100%" stop-color="${c2}"/>
-          </linearGradient>
-        </defs>
-        <rect width="800" height="1000" fill="url(#g${seed})"/>
-      </svg>`;
-    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-  }
-
   // ---- REAL PHOTOS -------------------------------------------------
   // Add new photos here — one object per photo, in any order.
   const PHOTOS = [
@@ -76,27 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
     { src: 'assets/jedlo_7.jpg', alt: 'BB Catering — jedlo, fotka 7', cat: 'jedlo', span: 'tall' },
     { src: 'assets/jedlo_8.jpg', alt: 'BB Catering — jedlo, fotka 8', cat: 'jedlo', span: '' }
   ];
-
-  // ---- PLACEHOLDER PHOTOS (categories without real photos yet) -----
-  // Auto-fills 5 placeholder tiles for every category that has no real
-  // photos in the PHOTOS list above. As soon as a category gets its
-  // first real photo added above, its placeholders are skipped
-  // automatically — no need to remove anything by hand.
-  const catsWithRealPhotos = new Set(PHOTOS.map(p => p.cat));
-  const spans = ['', 'tall', '', 'wide', ''];
-  let seed = 0;
-  Object.keys(CATS).forEach(cat => {
-    if (catsWithRealPhotos.has(cat)) return;
-    for (let i = 1; i <= 5; i++) {
-      PHOTOS.push({
-        src: placeholderSrc(cat, seed),
-        alt: `${CATS[cat]} — BB Catering, fotka ${i}`,
-        cat,
-        span: spans[seed % spans.length]
-      });
-      seed++;
-    }
-  });
 
   /* ---------------------------------------------------------------------
      2) RENDER WALL
