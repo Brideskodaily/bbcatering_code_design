@@ -1345,6 +1345,14 @@ a {
   line-height: 1.5;
   color: rgba(244,240,233,0.85);
 }
+.cookie-banner-link {
+  color: var(--gold-bright);
+  border-bottom: 1px solid rgba(199,168,102,0.4);
+  transition: border-color 0.3s ease;
+}
+.cookie-banner-link:hover {
+  border-color: var(--gold-bright);
+}
 .cookie-banner-btn {
   flex: 0 0 auto;
   background: var(--gold);

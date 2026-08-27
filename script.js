@@ -312,8 +312,9 @@ document.addEventListener('DOMContentLoaded', () => {
     banner.setAttribute('aria-label', 'Súhlas s používaním cookies');
     banner.innerHTML = `
       <p class="cookie-banner-text">
-        Táto stránka používa cookies na zlepšenie vášho zážitku a analýzu
-        návštevnosti. Používaním webu s tým súhlasíte.
+        Táto stránka používa cookies nevyhnutné pre jej fungovanie.
+        Používaním webu s tým súhlasíte. Viac v
+        <a href="zasady-cookies.html" class="cookie-banner-link">zásadách používania cookies</a>.
       </p>
       <button type="button" class="cookie-banner-btn">Súhlasím</button>
     `;
