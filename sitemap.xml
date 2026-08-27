@@ -6,6 +6,36 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://www.bbcatering.sk/svadby.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.bbcatering.sk/firemne-eventy.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.bbcatering.sk/rodinne-oslavy.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.bbcatering.sk/garden-party.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.bbcatering.sk/vip-vecere.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.bbcatering.sk/degustacie.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.bbcatering.sk/galeria.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
