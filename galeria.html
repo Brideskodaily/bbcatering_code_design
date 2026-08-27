@@ -130,7 +130,10 @@
         <h2 class="contact-title">Povedzte nám svoju predstavu.<br>O všetko ostatné sa postaráme my.</h2>
       </div>
 
-      <form class="contact-form" id="contactForm">
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="c0b21e21-45ea-490c-adc6-bf7d09708a26">
+        <input type="hidden" name="subject" value="Nová správa z webu BB Catering">
+        <input type="checkbox" name="botcheck" class="botcheck-field" tabindex="-1" autocomplete="off">
         <div class="form-row">
           <div class="form-field">
             <input type="text" id="fname" name="fname" required placeholder=" ">

@@ -1162,6 +1162,17 @@ a {
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
+/* Honeypot field for Web3Forms spam protection — invisible to real
+   visitors, but present in the DOM for bots that auto-fill every field. */
+.botcheck-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .form-field {
   position: relative;
   margin-bottom: 28px;
@@ -1296,3 +1307,66 @@ a {
    Section-level reveal helper: children stagger via inline transition-delay
    set in JS
    ========================================================================== */
+/* ==========================================================================
+   COOKIE CONSENT BANNER
+   ========================================================================== */
+.cookie-banner {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 300;
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--forest-deep);
+  color: var(--cream);
+  border: 1px solid rgba(244,240,233,0.14);
+  border-radius: 10px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s var(--ease-soft), transform 0.4s var(--ease-soft);
+  pointer-events: none;
+}
+.cookie-banner.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.cookie-banner-text {
+  flex: 1 1 320px;
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: rgba(244,240,233,0.85);
+}
+.cookie-banner-btn {
+  flex: 0 0 auto;
+  background: var(--gold);
+  color: var(--forest-deep);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s var(--ease);
+}
+.cookie-banner-btn:hover {
+  background: var(--gold-bright);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 520px) {
+  .cookie-banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 16px 18px;
+  }
+}

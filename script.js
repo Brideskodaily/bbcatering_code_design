@@ -212,25 +212,56 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------------------------------------------------------------------
-     7) CONTACT FORM — lightweight submit feedback (no backend wired up)
-        The submit button lives outside the <form> element (linked via its
-        form="contactForm" attribute) so it can sit in a separate panel row
-        alongside the Instagram link — so it's looked up by id rather than
-        as a descendant of the form.
+     7) CONTACT FORM — real submission via Web3Forms API (fetch), with
+        lightweight visual feedback on the button. The submit button lives
+        outside the <form> element (linked via its form="contactForm"
+        attribute) so it can sit in a separate panel row alongside the
+        Instagram link — so it's looked up by id rather than as a
+        descendant of the form.
   --------------------------------------------------------------------- */
   const form = document.getElementById('contactForm');
   const submitBtn = document.querySelector('.btn-submit');
   if (form && submitBtn) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const original = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span class="arrow">✓</span> odoslané';
-      submitBtn.style.pointerEvents = 'none';
-      setTimeout(() => {
-        submitBtn.innerHTML = original;
-        submitBtn.style.pointerEvents = '';
+
+      // Honeypot: if this hidden field got filled in, it's a bot — silently
+      // pretend to succeed without ever sending the request.
+      const honeypot = form.querySelector('[name="botcheck"]');
+      if (honeypot && honeypot.checked) {
         form.reset();
-      }, 2400);
+        return;
+      }
+
+      const original = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<span class="arrow">…</span> odosielam';
+      submitBtn.style.pointerEvents = 'none';
+
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            submitBtn.innerHTML = '<span class="arrow">✓</span> odoslané';
+            form.reset();
+          } else {
+            submitBtn.innerHTML = '<span class="arrow">!</span> chyba, skúste znova';
+          }
+        })
+        .catch(() => {
+          submitBtn.innerHTML = '<span class="arrow">!</span> chyba, skúste znova';
+        })
+        .finally(() => {
+          setTimeout(() => {
+            submitBtn.innerHTML = original;
+            submitBtn.style.pointerEvents = '';
+          }, 3200);
+        });
     });
   }
 
@@ -268,7 +299,36 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------------------------------------------------------------------
-     9) SECTION SNAP — Hero, Team, and the 4 story blocks each occupy one
+     9) COOKIE CONSENT BANNER — simple accept banner, remembers choice in
+        localStorage so it only shows once per browser. No cookie
+        categories/preferences — a single "Súhlasím" acknowledges use of
+        essential + analytics cookies site-wide.
+  --------------------------------------------------------------------- */
+  const COOKIE_CONSENT_KEY = 'bb_cookie_consent';
+  if (!localStorage.getItem(COOKIE_CONSENT_KEY)) {
+    const banner = document.createElement('div');
+    banner.className = 'cookie-banner';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-label', 'Súhlas s používaním cookies');
+    banner.innerHTML = `
+      <p class="cookie-banner-text">
+        Táto stránka používa cookies na zlepšenie vášho zážitku a analýzu
+        návštevnosti. Používaním webu s tým súhlasíte.
+      </p>
+      <button type="button" class="cookie-banner-btn">Súhlasím</button>
+    `;
+    document.body.appendChild(banner);
+    requestAnimationFrame(() => banner.classList.add('is-visible'));
+
+    banner.querySelector('.cookie-banner-btn').addEventListener('click', () => {
+      localStorage.setItem(COOKIE_CONSENT_KEY, '1');
+      banner.classList.remove('is-visible');
+      setTimeout(() => banner.remove(), 400);
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+     10) SECTION SNAP — Hero, Team, and the 4 story blocks each occupy one
         full "scroll step": a single wheel/trackpad gesture jumps straight
         to the next section, instead of scrolling through it gradually.
 
