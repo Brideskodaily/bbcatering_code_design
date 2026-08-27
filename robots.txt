@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /novy-projekt.html
+
+Sitemap: https://www.bbcatering.sk/sitemap.xml
