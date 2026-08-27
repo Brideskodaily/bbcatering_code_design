@@ -179,6 +179,38 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------------------------------------------------------------------
+     5b) LAZY VIDEO LOADING — story-block videos below the fold don't
+         start downloading or playing until they're about to enter the
+         viewport. Cuts unnecessary bandwidth/decoding on page load,
+         especially on mobile, without changing how they look once
+         visible (still autoplay + loop from that point on).
+  --------------------------------------------------------------------- */
+  const lazyVideos = document.querySelectorAll('[data-lazy-video]');
+  if (lazyVideos.length) {
+    if ('IntersectionObserver' in window) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const video = entry.target;
+            video.preload = 'auto';
+            video.play().catch(() => {});
+            videoObserver.unobserve(video);
+          }
+        });
+      }, {
+        rootMargin: '200px 0px 200px 0px'
+      });
+      lazyVideos.forEach(v => videoObserver.observe(v));
+    } else {
+      // No IntersectionObserver support: fall back to loading immediately.
+      lazyVideos.forEach(v => {
+        v.preload = 'auto';
+        v.play().catch(() => {});
+      });
+    }
+  }
+
+  /* ---------------------------------------------------------------------
      6) MOBILE HAMBURGER MENU
   --------------------------------------------------------------------- */
   const hamburger = document.getElementById('navHamburger');
