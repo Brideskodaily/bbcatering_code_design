@@ -1039,7 +1039,7 @@ a {
    ========================================================================== */
 .gallery {
   background: #f2efeb;
-  padding: 140px clamp(20px, 5vw, 64px) 160px;
+  padding: 140px clamp(20px, 5vw, 64px) 64px;
 }
 .gallery-header {
   max-width: 700px;
@@ -1384,11 +1384,11 @@ a {
    ========================================================================== */
 .partners {
   background: var(--cream);
-  padding: 40px clamp(20px, 5vw, 64px);
+  padding: 56px clamp(20px, 5vw, 64px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
 }
 .partners-label {
   font-size: 0.72rem;
@@ -1406,7 +1406,7 @@ a {
   gap: clamp(32px, 6vw, 72px);
 }
 .partners-logo {
-  height: 128px;
+  height: 156px;
   width: auto;
   object-fit: contain;
   opacity: 0.72;
