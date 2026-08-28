@@ -1406,7 +1406,7 @@ a {
   gap: clamp(32px, 6vw, 72px);
 }
 .partners-logo {
-  height: 34px;
+  height: 156px;
   width: auto;
   object-fit: contain;
   opacity: 0.72;
@@ -1420,6 +1420,9 @@ a {
 
 @media (max-width: 600px) {
   .partners { padding: 44px clamp(20px, 5vw, 64px); gap: 24px; }
-  .partners-row { gap: 28px; }
-  .partners-logo { height: 26px; }
+  .partners-row { gap: 24px 32px; }
+  .partners-logo { height: 72px; }
+}
+@media (max-width: 420px) {
+  .partners-logo { height: 56px; }
 }
